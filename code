@@ -1,0 +1,73 @@
+//Gurka
+#include <iostream>
+using namespace std;
+
+void Startscreen (double& play);
+
+int main ()
+{
+    double play;
+    Startscreen (play);
+
+    return 0;
+}
+void Startscreen (double& play)
+{
+cout<<"         GGGGGGGGGGG  UUUUUUUU     UUUUUUUU  RRRRRRRRRRRRRRRR    KKKKKKKKK    KKKKKKK              AAA               "<< endl;
+cout<<"     GGG::::::::::::G U::::::U     U::::::U R::::::::::::::::R   K:::::::K    K:::::K             A:::A              "<< endl;
+cout<<"   GG:::::::::::::::G U::::::U     U::::::U R::::::RRRRRR:::::R  K:::::::K    K:::::K            A:::::A             "<< endl;
+cout<<"  G:::::GGGGGGGG::::G UU:::::U     U:::::UU RR:::::R     R:::::R K:::::::K   K::::::K           A:::::::A            "<< endl;
+cout<<"  G:::::G       GGGGGG U:::::U     U:::::U   R::::R     R:::::R  KK::::::K  K:::::KKK          A:::::::::A           "<< endl;
+cout<<" G:::::G               U:::::D     D:::::U   R::::R     R:::::R   K:::::K K:::::K             A:::::A:::::A          "<< endl;
+cout<<" G:::::G               U:::::D     D:::::U   R::::RRRRRR:::::R    K::::::K:::::K             A:::::A A:::::A         "<< endl;
+cout<<" G:::::G    GGGGGGGGGG U:::::D     D:::::U   R:::::::::::::RR     K:::::::::::K             A:::::A   A:::::A        "<< endl;
+cout<<" G:::::G    G::::::::G U:::::D     D:::::U   R::::RRRRRR:::::R    K:::::::::::K            A:::::A     A:::::A       "<< endl;
+cout<<" G:::::G    GGGGG::::G U:::::D     D:::::U   R::::R     R:::::R   K::::::K:::::K          A:::::AAAAAAAAA:::::A      "<< endl;
+cout<<" G:::::G        G::::G U:::::D     D:::::U   R::::R     R:::::R   K:::::K K:::::K        A:::::::::::::::::::::A     "<< endl;
+cout<<"  G:::::G       G::::G U::::::U   U::::::U   R::::R     R:::::R KK::::::K  K:::::KKK    A:::::AAAAAAAAAAAAA:::::A    "<< endl;
+cout<<"   G:::::GGGGGGGG::::G U:::::::UUU:::::::U RR:::::R     R:::::R K:::::::K   K::::::K   A:::::A             A:::::A   "<< endl;
+cout<<"    GG:::::::::::::::G  UU:::::::::::::UU  R::::::R     R:::::R K:::::::K    K:::::K  A:::::A               A:::::A  "<< endl;
+cout<<"      GGG::::::GGG:::G    UU:::::::::UU    R::::::R     R:::::R K:::::::K    K:::::K A:::::A                 A:::::A "<< endl;
+cout<<"         GGGGGG   GGGG      UUUUUUUUU      RRRRRRRR     RRRRRRR KKKKKKKKK    KKKKKKKAAAAAAA                  AAAAAAA"<< endl<<endl;
+
+
+cout<<"Would you like to play Gurka?"<<endl;
+cout<<"1 for yes 2 for instructions, or 3 for no"<<endl;
+cin>>play;
+while (true)
+{
+    if (cin.fail())
+    {
+        cin.clear();
+        cout<<"Please enter a number"<<endl;
+        cin.ignore(10000, '\n');
+        cin>>play;
+    }
+
+    if (play < 1)
+    {
+        cout<<"Please enter 1, 2 or 3"<<endl;
+        cin>>play;
+    }
+
+    if (play > 3)
+    {
+        cout<<"Please enter 1, 2 or 3"<<endl;
+        cin>>play;
+    }
+    
+    else
+    {
+        break;
+    }
+}
+
+if (play == 1)
+{ }
+
+if (play == 2)
+{
+cout<<" This game gives each player 7 random cards. The first person chosen will be able to place down the first" << endl;
+cout<<" card. "
+}
+}
