@@ -3,16 +3,35 @@
 using namespace std;
 
 void Startscreen (double& play);
+void Players (double& players);
+void notplay ();
+void groundwaterlyrics();
 
 int main ()
 {
     double play;
-    Startscreen (play);
+    double players;
 
+    Startscreen (play);
+    if (play == 1)
+    {
+        Players (players);
+    }
+    if (play == 2)
+    {
+        notplay ();
+    }
+    if (play == 4)
+    {
+        groundwaterlyrics(); 
+    }
+    
     return 0;
 }
+
 void Startscreen (double& play)
 {
+cout<<"                                                WELCOME TO                                                           "<<endl;
 cout<<"         GGGGGGGGGGG  UUUUUUUU     UUUUUUUU  RRRRRRRRRRRRRRRR    KKKKKKKKK    KKKKKKK              AAA               "<< endl;
 cout<<"     GGG::::::::::::G U::::::U     U::::::U R::::::::::::::::R   K:::::::K    K:::::K             A:::A              "<< endl;
 cout<<"   GG:::::::::::::::G U::::::U     U::::::U R::::::RRRRRR:::::R  K:::::::K    K:::::K            A:::::A             "<< endl;
@@ -28,12 +47,16 @@ cout<<"  G:::::G       G::::G U::::::U   U::::::U   R::::R     R:::::R KK::::::K
 cout<<"   G:::::GGGGGGGG::::G U:::::::UUU:::::::U RR:::::R     R:::::R K:::::::K   K::::::K   A:::::A             A:::::A   "<< endl;
 cout<<"    GG:::::::::::::::G  UU:::::::::::::UU  R::::::R     R:::::R K:::::::K    K:::::K  A:::::A               A:::::A  "<< endl;
 cout<<"      GGG::::::GGG:::G    UU:::::::::UU    R::::::R     R:::::R K:::::::K    K:::::K A:::::A                 A:::::A "<< endl;
-cout<<"         GGGGGG   GGGG      UUUUUUUUU      RRRRRRRR     RRRRRRR KKKKKKKKK    KKKKKKKAAAAAAA                  AAAAAAA"<< endl<<endl;
+cout<<"         GGGGGG   GGGG      UUUUUUUUU      RRRRRRRR     RRRRRRR KKKKKKKKK    KKKKKKKAAAAAAA                   AAAAAAA"<< endl<<endl;
 
 
-cout<<"Would you like to play Gurka?"<<endl;
-cout<<"1 for yes 2 for instructions, or 3 for no"<<endl;
+cout<<"Would you like to play?"<<endl;
+cout<<"1 for yes, 2 for no, 3 for instructions"<<endl;
 cin>>play;
+
+
+
+
 while (true)
 {
     if (cin.fail())
@@ -44,30 +67,178 @@ while (true)
         cin>>play;
     }
 
+
+
     if (play < 1)
     {
+        cin.clear();
         cout<<"Please enter 1, 2 or 3"<<endl;
         cin>>play;
     }
 
-    if (play > 3)
+
+    if (play > 4)
     {
+        cin.clear();
         cout<<"Please enter 1, 2 or 3"<<endl;
         cin>>play;
     }
-    
     else
     {
         break;
     }
 }
 
-if (play == 1)
-{ }
 
-if (play == 2)
+
+if (play == 3)
 {
-cout<<" This game gives each player 7 random cards. The first person chosen will be able to place down the first" << endl;
-cout<<" card. "
+    cout<<"This game gives each player 7 random cards. The first person chosen will be able to place down the first card." << endl;
+    cout<<"The next player has to match or beat the card value of the highest card placed, or"<<endl;
+    cout<<"if the player cannot beat the highest card he/she must place the lowest card they have."<<endl;
+    cout<<"The person that placed the highest card wins that round which means they get to place the first card of the next round."<<endl;
+    cout<<"At the last round everybody places their last card the person with the lowest card wins.\n\n"<<endl;
+
+    cout<<"Would you like to Play"<<endl;
+    cout<<"1 for yes, 2 for no\n\n"<<endl;
+    cin>>play;
+
+    
+    while (true)
+    {
+        if (cin.fail())
+        {
+            cin.clear();
+            cout<<"Please enter a number"<<endl;
+            cin.ignore(10000, '\n');
+            cin>>play;
+        }
+
+        if (play < 1)
+        {
+            cin.clear();
+            cout<<"Please enter 1 or 2"<<endl;
+            cin>>play;
+            }
+
+        if (play > 2)
+        {
+            cin.clear();
+            cout<<"Please enter 1 or 2"<<endl;
+            cin>>play;
+        }
+
+        else
+        {
+            break;
+        }
 }
+}
+if (play == 4)
+{
+    groundwaterlyrics();
+    cout<<endl;
+    cout<<"Would you like to play?"<<endl;
+    cout<<"1 for yes, 2 for no"<<endl;
+    cin>>play;
+}
+
+void Players (double& players)
+{
+    cout<<"Welcome to Gurka!"<<endl;
+    cout<<"Please enter the number of players"<<endl;
+    cout<<"2-4 players"<<endl;
+    cin>>players;
+        while (true)
+        {
+            if (cin.fail())
+            {
+                cin.clear();
+                cout<<"Please enter a number"<<endl;
+                cin.ignore(10000, '\n');
+                cin>>players;
+            }
+
+            if (players < 2)
+            {
+                cin.clear();
+                cout<<"Please enter a number between 2 and 4"<<endl;
+                cin>>players;
+            }
+
+            if (players > 4)
+            {
+                cin.clear();
+                cout<<"Please enter a number between 2 and 4"<<endl;
+                cin>>players;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+}
+
+void notplay ()
+{
+    cout<<"\n\nThank you for NOT playing Gurka!"<<endl;
+    cout<<"Goodbye!"<<endl;
+    cout <<"Press enter to exit."<<endl;
+}
+
+void groundwaterlyrics(){
+    cout<<endl<<"GARDENER: Hey what happened to my water?"<<endl;
+    cout<<"GROUNDHOG 1: There is something here that"<<endl;
+    cout<<"you should knoooooww."<<endl;
+    cout<<"GROUNDHOG 2: The story of water from down belooooww."<<endl;
+    cout<<"GROUNDWATER: Ooh I'm groundwater, I'm all"<<endl;
+    cout<<"around, most of your water is under ground"<<endl;
+    cout<<"the water we have is all the same"<<endl;
+    cout<<"I'm used over and over again"<<endl;
+    cout<<"[music]"<<endl;
+    cout<<"I surrounded the castle with a watery moat"<<endl;
+    cout<<"and I flowed along under Huck Finn's boat"<<endl;
+    cout<<"I once dripped down as dinosaur drool and"<<endl;
+    cout<<"now I'm the cool, that fills your swimming pool."<<endl;
+    cout<<"GROUNDHOGS: Feel the drops of snow and rain"<<endl;
+    cout<<"an age old cycle again and again"<<endl;
+    cout<<"groundwater under the ground - "<<endl;
+    cout<<"groundwater flowing down"<<endl;
+    cout<<"in the ground - groundwater"<<endl;
+    cout<<"all around - Groundwater"<<endl;
+    cout<<"Don't you know why we should care - the water we use is every where"<<endl;
+    cout<<"GROUNDWATER: Riding along the aquifers, deep down under, where no one stirs"<<endl;
+    cout<<"I feed the lakes, streams and lands"<<endl;
+    cout<<"I'm pulled by wells, I'm in demand"<<endl;
+    cout<<"[Tug boat horn, Slurp sounds]"<<endl;
+    cout<<"Flowing along like great buried treasure, slipping through space to small to measure"<<endl;
+    cout<<"I may start with an oily sheen, but the dirt and rocks help keep me clean"<<endl;
+    cout<<"GROUNDHOGS: Swallow and swim. shave and spray."<<endl;
+    cout<<"We all use water everyday"<<endl;
+    cout<<"Some for fishes. Some for dishes. But is there enough for everyone's wishes?"<<endl;
+    cout<<"Use it - groundwater Don't abuse it - groundwater"<<endl;
+    cout<<"We use our groundwater everyday. Let's make sure it's here to stay."<<endl;
+    cout<<"GROUNDWATER: Oh rainy days, I must lament the troubles I have with tar and cement."<<endl;
+    cout<<"I can't fill the ground if I can't get through."<<endl;
+    cout<<"I'm groundwater, my power is vast, but waste and pollution keep me from my task."<<endl;
+    cout<<"If we are not careful CLEAN water won't last."<<endl;
+    cout<<"GROUNDHOGS: Without some help, we can't carry on."<<endl;
+    cout<<"What will we do if the water is goooooonne?"<<endl;
+    cout<<"Every time you brush your teeth remember the water underneath."<<endl;
+    cout<<"Next time wait. stop. and think"<<endl;
+    cout<<"before you dump stuff down the sink"<<endl;
+    cout<<"Do you part for water power - learn to take"<<endl;
+    cout<<"a shorter shower"<<endl;
+    cout<<"Stuff that makes your grass look swell - will"<<endl;
+    cout<<"later end up in your well"<<endl;
+    cout<<"Protect - Groundwater"<<endl;
+    cout<<"Conserve - Groundwater"<<endl;
+    cout<<"As you plan to build and grow - leave open"<<endl;
+    cout<<"space for water to flow"<<endl;
+    cout<<"Be aware! - groundwater"<<endl;
+    cout<<"Show you care! - groundwater"<<endl;
+    cout<<"Now you are in the know. Don't forget the water down below"<<endl;
+    cout<<"Don't forget the water down below"<<endl;
+    cout<<"EVERYONE: Don't forget the water down beloooowwww"<<endl<<endl;
 }
