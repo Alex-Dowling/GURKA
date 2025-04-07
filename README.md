@@ -1,4 +1,4 @@
 # GURKA
 
-This is a recreation of the card game gurka as a peogram in C++.
-Alex, Dylan, Tyler
+This is a recreation of the card game Gurka as a program in C++.
+made by Alex, Dylan, Tyler
