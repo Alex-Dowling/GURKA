@@ -142,6 +142,7 @@ if (play == 4)
     cout<<"1 for yes, 2 for no"<<endl;
     cin>>play;
 }
+}
 
 void Players (double& players)
 {
