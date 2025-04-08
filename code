@@ -1,18 +1,25 @@
 //Gurka
 #include <iostream>
+#include <cmath>
 using namespace std;
 
-void Startscreen (double& play);
+void Startscreen (double& play, double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
 void Players (double& players);
 void notplay ();
 void groundwaterlyrics();
+void weather(double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
+void weathInput (double& tempf, double& windspeed, double& dew);
+void weathcalculate (double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
+void weathDisplay (double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
 
 int main ()
 {
     double play;
     double players;
+    double tempf, windspeed, dew;
+    double cloudb, Windchill;
 
-    Startscreen (play);
+    Startscreen (play, tempf, windspeed, Windchill, dew, cloudb);
     if (play == 1)
     {
         Players (players);
@@ -23,13 +30,13 @@ int main ()
     }
     if (play == 4)
     {
-        groundwaterlyrics(); 
+        groundwaterlyrics();
     }
-    
+
     return 0;
 }
 
-void Startscreen (double& play)
+void Startscreen (double& play, double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill)
 {
 cout<<"                                                WELCOME TO                                                           "<<endl;
 cout<<"         GGGGGGGGGGG  UUUUUUUU     UUUUUUUU  RRRRRRRRRRRRRRRR    KKKKKKKKK    KKKKKKK              AAA               "<< endl;
@@ -77,7 +84,7 @@ while (true)
     }
 
 
-    if (play > 4)
+    if (play > 5)
     {
         cin.clear();
         cout<<"Please enter 1, 2 or 3"<<endl;
@@ -103,7 +110,7 @@ if (play == 3)
     cout<<"1 for yes, 2 for no\n\n"<<endl;
     cin>>play;
 
-    
+
     while (true)
     {
         if (cin.fail())
@@ -142,6 +149,12 @@ if (play == 4)
     cout<<"1 for yes, 2 for no"<<endl;
     cin>>play;
 }
+
+if (play == 5)
+{
+    weather(tempf, windspeed, dew, cloudb, Windchill);
+    cout<<endl;
+}
 }
 
 void Players (double& players)
@@ -167,7 +180,7 @@ void Players (double& players)
                 cin>>players;
             }
 
-            if (players > 4)
+            if (players > 5)
             {
                 cin.clear();
                 cout<<"Please enter a number between 2 and 4"<<endl;
@@ -242,4 +255,83 @@ void groundwaterlyrics(){
     cout<<"Now you are in the know. Don't forget the water down below"<<endl;
     cout<<"Don't forget the water down below"<<endl;
     cout<<"EVERYONE: Don't forget the water down beloooowwww"<<endl<<endl;
+}
+
+void weather(double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill)
+{
+    // Table defining use of Program
+    cout<<" ___________________________________________________"<<endl;
+    cout<<"|                                                   |"<<endl;
+    cout<<"| This program calculates Cloud base and wind chill |"<<endl;
+    cout<<"| Please enter temperature in Fahrenheit the dew    |"<<endl;
+    cout<<"| point in Fahrenheit, and wind speed to start      |"<<endl;
+    cout<<"|___________________________________________________|"<<endl;
+
+    weathInput(tempf, dew, windspeed);
+
+    weathcalculate(tempf, windspeed, dew, cloudb, Windchill);
+
+    weathDisplay(tempf, windspeed, dew, cloudb, Windchill);
+}
+
+void weathInput(double& tempf, double& dew, double& windspeed)
+    {
+
+        // Asking for Temperature
+        cout<<endl<<"Temperature in Fahrenheit: ";
+        cin>>tempf;
+        while(cin.fail())
+                {
+                cout<<"Please enter an number not a character"<<endl;
+                cin.clear();
+                cin.ignore(10000, '\n');
+                cin>>tempf;
+                }
+
+        // Asking for The Dew point
+        cout<<endl<<"Dew point in Fahrenheit: ";
+        cin>>dew;
+        while(cin.fail())
+            {
+            cout<<"Please enter an number not a character"<<endl;
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cin>>dew;
+            }
+
+        // Asking for Wind speed
+        cout<<endl<<"Wind speed in mph: ";
+        cin>>windspeed;
+        while(cin.fail())
+            {
+            cout<<"Please enter an number not a character"<<endl;
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cin>>windspeed;
+            }
+        cout<<endl<<endl;
+}
+
+    void weathcalculate(double& tempf, double& windspeed, double& dew, double& cloudb,  double& Windchill)
+{
+        cloudb = ((tempf - dew) / 4.4) * 1000;
+        Windchill = 35.74 + ((0.6215 * tempf) - (35.75 * (pow(windspeed, 0.16)))) + (0.4275 * tempf * (pow(windspeed, 0.16)));
+
+
+
+}
+
+    //Displaying output
+    void weathDisplay(double& tempf, double& windspeed, double& dew, double& cloudb,  double& Windchill)
+{
+        cout<<" Temperature |  "<<tempf<<" F"<<endl;
+        cout<<"-------------|-------------"<<endl;
+        cout<<"  Dew Point  |  "<<dew<<" F"<<endl;
+        cout<<"-------------|-------------"<<endl;
+        cout<<" Wind speed  |  "<<windspeed<<" mph"<<endl;
+        cout<<"-------------|-------------"<<endl;
+        cout<<" Wind Chill  |  "<<Windchill<<" F"<<endl;
+        cout<<"-------------|-------------"<<endl;
+        cout<<" Cloud Base  |  "<<cloudb<<" ft"<<endl;
+
 }
