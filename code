@@ -4,13 +4,13 @@
 using namespace std;
 
 void Startscreen (double& play, double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
-void Players (double& players);
 void notplay ();
 void groundwaterlyrics();
 void weather(double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
 void weathInput (double& tempf, double& windspeed, double& dew);
 void weathcalculate (double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
 void weathDisplay (double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
+void Instructions ();
 
 int main ()
 {
@@ -22,16 +22,15 @@ int main ()
     Startscreen (play, tempf, windspeed, Windchill, dew, cloudb);
     if (play == 1)
     {
-        Players (players);
+
+
     }
+
     if (play == 2)
     {
         notplay ();
     }
-    if (play == 4)
-    {
-        groundwaterlyrics();
-    }
+
 
     return 0;
 }
@@ -66,96 +65,52 @@ cin>>play;
 
 while (true)
 {
-    if (cin.fail())
+    if (play == 2006)
     {
-        cin.clear();
-        cout<<"Please enter a number"<<endl;
-        cin.ignore(10000, '\n');
+        groundwaterlyrics();
+        cout<<endl;
+        cout<<"Would you like to play?"<<endl;
+        cout<<"1 for yes, 2 for no, 3 for instructions"<<endl;
         cin>>play;
     }
 
-
-
-    if (play < 1)
+    if (play == 6)
     {
+    weather(tempf, windspeed, dew, cloudb, Windchill);
+    cout<<endl<<endl;
+    cout<<"Would you like to play?"<<endl;
+    cout<<"1 for yes, 2 for no, 3 for instructions"<<endl;
+    cin>>play;
+    }
+
+    if (play == 3)
+    {
+        Instructions ();
         cin.clear();
-        cout<<"Please enter 1, 2 or 3"<<endl;
         cin>>play;
     }
 
-
-    if (play > 5)
-    {
-        cin.clear();
-        cout<<"Please enter 1, 2 or 3"<<endl;
-        cin>>play;
-    }
-    else
+    if (play == 1)
     {
         break;
     }
-}
 
 
-
-if (play == 3)
-{
-    cout<<"This game gives each player 7 random cards. The first person chosen will be able to place down the first card." << endl;
-    cout<<"The next player has to match or beat the card value of the highest card placed, or"<<endl;
-    cout<<"if the player cannot beat the highest card he/she must place the lowest card they have."<<endl;
-    cout<<"The person that placed the highest card wins that round which means they get to place the first card of the next round."<<endl;
-    cout<<"At the last round everybody places their last card the person with the lowest card wins.\n\n"<<endl;
-
-    cout<<"Would you like to Play"<<endl;
-    cout<<"1 for yes, 2 for no\n\n"<<endl;
-    cin>>play;
-
-
-    while (true)
+    if (play == 2)
     {
-        if (cin.fail())
-        {
-            cin.clear();
-            cout<<"Please enter a number"<<endl;
-            cin.ignore(10000, '\n');
-            cin>>play;
-        }
+        break;
+    }
 
-        if (play < 1)
-        {
-            cin.clear();
-            cout<<"Please enter 1 or 2"<<endl;
-            cin>>play;
-            }
-
-        if (play > 2)
-        {
-            cin.clear();
-            cout<<"Please enter 1 or 2"<<endl;
-            cin>>play;
-        }
-
-        else
-        {
-            break;
-        }
+    else
+    {
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cout<<"Please enter 1, 2 or 3"<<endl;
+        cin>>play;
+    }
 }
-}
-if (play == 4)
-{
-    groundwaterlyrics();
-    cout<<endl;
-    cout<<"Would you like to play?"<<endl;
-    cout<<"1 for yes, 2 for no"<<endl;
-    cin>>play;
 }
 
-if (play == 5)
-{
-    weather(tempf, windspeed, dew, cloudb, Windchill);
-    cout<<endl;
-}
-}
 
 void Players (double& players)
 {
@@ -267,6 +222,8 @@ void weather(double& tempf, double& windspeed, double& dew, double& cloudb, doub
     cout<<"| point in Fahrenheit, and wind speed to start      |"<<endl;
     cout<<"|___________________________________________________|"<<endl;
 
+
+    // Bringing back the values from the main function
     weathInput(tempf, dew, windspeed);
 
     weathcalculate(tempf, windspeed, dew, cloudb, Windchill);
@@ -280,6 +237,8 @@ void weathInput(double& tempf, double& dew, double& windspeed)
         // Asking for Temperature
         cout<<endl<<"Temperature in Fahrenheit: ";
         cin>>tempf;
+
+
         while(cin.fail())
                 {
                 cout<<"Please enter an number not a character"<<endl;
@@ -288,9 +247,12 @@ void weathInput(double& tempf, double& dew, double& windspeed)
                 cin>>tempf;
                 }
 
+
         // Asking for The Dew point
         cout<<endl<<"Dew point in Fahrenheit: ";
         cin>>dew;
+
+
         while(cin.fail())
             {
             cout<<"Please enter an number not a character"<<endl;
@@ -299,9 +261,12 @@ void weathInput(double& tempf, double& dew, double& windspeed)
             cin>>dew;
             }
 
+
         // Asking for Wind speed
         cout<<endl<<"Wind speed in mph: ";
         cin>>windspeed;
+
+
         while(cin.fail())
             {
             cout<<"Please enter an number not a character"<<endl;
@@ -316,8 +281,6 @@ void weathInput(double& tempf, double& dew, double& windspeed)
 {
         cloudb = ((tempf - dew) / 4.4) * 1000;
         Windchill = 35.74 + ((0.6215 * tempf) - (35.75 * (pow(windspeed, 0.16)))) + (0.4275 * tempf * (pow(windspeed, 0.16)));
-
-
 
 }
 
@@ -335,3 +298,16 @@ void weathInput(double& tempf, double& dew, double& windspeed)
         cout<<" Cloud Base  |  "<<cloudb<<" ft"<<endl;
 
 }
+
+void Instructions ()
+{
+    cout<<"This game gives each player 7 random cards. The first person chosen will be able to place down the first card." << endl;
+    cout<<"The next player has to match or beat the card value of the highest card placed, or"<<endl;
+    cout<<"if the player cannot beat the highest card he/she must place the lowest card they have."<<endl;
+    cout<<"The person that placed the highest card wins that round which means they get to place the first card of the next round."<<endl;
+    cout<<"At the last round everybody places their last card the person with the lowest card wins.\n\n"<<endl;
+
+    cout<<"Would you like to Play"<<endl;
+    cout<<"1 for yes, 2 for no, 3 for instructions"<<endl;
+}
+// WES SPAUGH
