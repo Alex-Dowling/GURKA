@@ -1,4 +1,3 @@
-//Gurka
 #include <iostream>
 #include <cmath>
 using namespace std;
@@ -11,6 +10,8 @@ void weathInput (double& tempf, double& windspeed, double& dew);
 void weathcalculate (double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
 void weathDisplay (double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
 void Instructions ();
+void Deck(int& One, int& Two, int& Three, int& Four, int& Five, int& Six, int& Seven, int& Eight, int& Nine, int& Ten, int& Jack, int& Queen, int& King, int& Ace);
+// Declared functions
 
 int main ()
 {
@@ -18,15 +19,18 @@ int main ()
     double players;
     double tempf, windspeed, dew;
     double cloudb, Windchill;
+    int One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace;
+
 
     Startscreen (play, tempf, windspeed, Windchill, dew, cloudb);
-    if (play == 1)
+    if (play == 1) // when user enters 1 it starts the game
     {
-
+        cout<<" Thank you for playing! The cards will distribute momentarily" << endl;
+        Deck(One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace);
 
     }
 
-    if (play == 2)
+    if (play == 2) // if user enters 2 it will direct them to the notplay function and end the program
     {
         notplay ();
     }
@@ -36,8 +40,10 @@ int main ()
 }
 
 void Startscreen (double& play, double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill)
-{
-cout<<"                                                WELCOME TO                                                           "<<endl;
+
+{ // function for startscreen
+
+cout<<"                                                WELCOME TO                                                           "<< endl;
 cout<<"         GGGGGGGGGGG  UUUUUUUU     UUUUUUUU  RRRRRRRRRRRRRRRR    KKKKKKKKK    KKKKKKK              AAA               "<< endl;
 cout<<"     GGG::::::::::::G U::::::U     U::::::U R::::::::::::::::R   K:::::::K    K:::::K             A:::A              "<< endl;
 cout<<"   GG:::::::::::::::G U::::::U     U::::::U R::::::RRRRRR:::::R  K:::::::K    K:::::K            A:::::A             "<< endl;
@@ -55,53 +61,53 @@ cout<<"    GG:::::::::::::::G  UU:::::::::::::UU  R::::::R     R:::::R K:::::::K
 cout<<"      GGG::::::GGG:::G    UU:::::::::UU    R::::::R     R:::::R K:::::::K    K:::::K A:::::A                 A:::::A "<< endl;
 cout<<"         GGGGGG   GGGG      UUUUUUUUU      RRRRRRRR     RRRRRRR KKKKKKKKK    KKKKKKKAAAAAAA                   AAAAAAA"<< endl<<endl;
 
-
 cout<<"Would you like to play?"<<endl;
-cout<<"1 for yes, 2 for no, 3 for instructions"<<endl;
+cout<<"1 for yes, 2 for no, 3 for instructions\n"<<endl;
 cin>>play;
-
 
 
 
 while (true)
 {
-    if (play == 2006)
+    if (play == 2006) //directs you to groundwater lyrics
     {
         groundwaterlyrics();
         cout<<endl;
         cout<<"Would you like to play?"<<endl;
-        cout<<"1 for yes, 2 for no, 3 for instructions"<<endl;
+        cout<<"1 for yes, 2 for no, 3 for instructions\n"<<endl;
         cin>>play;
     }
 
-    if (play == 6)
+    if (play == 6) //directs you to waether program
     {
     weather(tempf, windspeed, dew, cloudb, Windchill);
     cout<<endl<<endl;
     cout<<"Would you like to play?"<<endl;
-    cout<<"1 for yes, 2 for no, 3 for instructions"<<endl;
+    cout<<"1 for yes, 2 for no, 3 for instructions\n"<<endl;
     cin>>play;
     }
 
-    if (play == 3)
+    if (play == 3) //directs you to Instructions function
     {
         Instructions ();
         cin.clear();
         cin>>play;
     }
 
-    if (play == 1)
+    if (play == 1) // breaks and countinues in int main
     {
+
+
         break;
     }
 
 
-    if (play == 2)
+    if (play == 2) //breaks and countinues in int main
     {
         break;
     }
 
-    else
+    else // anything else that the user inputs loops
     {
         cin.clear();
         cin.ignore(10000, '\n');
@@ -112,51 +118,14 @@ while (true)
 }
 
 
-void Players (double& players)
-{
-    cout<<"Welcome to Gurka!"<<endl;
-    cout<<"Please enter the number of players"<<endl;
-    cout<<"2-4 players"<<endl;
-    cin>>players;
-        while (true)
-        {
-            if (cin.fail())
-            {
-                cin.clear();
-                cout<<"Please enter a number"<<endl;
-                cin.ignore(10000, '\n');
-                cin>>players;
-            }
-
-            if (players < 2)
-            {
-                cin.clear();
-                cout<<"Please enter a number between 2 and 4"<<endl;
-                cin>>players;
-            }
-
-            if (players > 5)
-            {
-                cin.clear();
-                cout<<"Please enter a number between 2 and 4"<<endl;
-                cin>>players;
-            }
-            else
-            {
-                break;
-            }
-        }
-
-}
-
-void notplay ()
+void notplay () //function for when user inputs 2
 {
     cout<<"\n\nThank you for NOT playing Gurka!"<<endl;
     cout<<"Goodbye!"<<endl;
     cout <<"Press enter to exit."<<endl;
 }
 
-void groundwaterlyrics(){
+void groundwaterlyrics(){ // grounddwater lyrics function
     cout<<endl<<"GARDENER: Hey what happened to my water?"<<endl;
     cout<<"GROUNDHOG 1: There is something here that"<<endl;
     cout<<"you should knoooooww."<<endl;
@@ -299,7 +268,7 @@ void weathInput(double& tempf, double& dew, double& windspeed)
 
 }
 
-void Instructions ()
+void Instructions () // function for when the user inputs 3
 {
     cout<<"This game gives each player 7 random cards. The first person chosen will be able to place down the first card." << endl;
     cout<<"The next player has to match or beat the card value of the highest card placed, or"<<endl;
@@ -310,4 +279,26 @@ void Instructions ()
     cout<<"Would you like to Play"<<endl;
     cout<<"1 for yes, 2 for no, 3 for instructions"<<endl;
 }
-// WES SPAUGH
+
+void Deck(int& One, int& Two, int& Three, int& Four, int& Five, int& Six, int& Seven, int& Eight, int& Nine, int& Ten, int& Jack, int& Queen, int& King, int& Ace)
+{
+
+    string deck [14] = {"One", "Two", " Three" , " Four",  "Five", " Six" , " Seven ", "Eight", "Nine", "Ten", "Jack", " Queen", " King", "Ace"};
+    One = 1;
+    Two = 2;
+    Three = 3;
+    Four = 4;
+    Five = 5;
+    Six = 6;
+    Seven = 7;
+    Eight = 8;
+    Nine = 9;
+    Ten = 10;
+    Jack = 11;
+    Queen = 12;
+    King = 13;
+    Ace = 14;
+
+
+
+}
