@@ -1,4 +1,8 @@
 #include <iostream>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+#include <algorithm>
 #include <cmath>
 using namespace std;
 
@@ -10,7 +14,11 @@ void weathInput (double& tempf, double& windspeed, double& dew);
 void weathcalculate (double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
 void weathDisplay (double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
 void Instructions ();
-void Deck(int& One, int& Two, int& Three, int& Four, int& Five, int& Six, int& Seven, int& Eight, int& Nine, int& Ten, int& Jack, int& Queen, int& King, int& Ace);
+void Deck(const vector<int>& deck, vector<int>& player, vector<int>& ai1, vector<int>& ai2, const string& name, const vector<int>& hand);
+void shuffle(vector<int>& deck);
+void deal(const vector<int>& deck, vector<int>& player, vector<int>& ai1, vector<int>& ai2);
+void Hand(const string& name, const vector<int>& hand);
+vector<int> createDeck();
 // Declared functions
 
 int main ()
@@ -19,14 +27,17 @@ int main ()
     double players;
     double tempf, windspeed, dew;
     double cloudb, Windchill;
-    int One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace;
+    vector<int> player, ai1, ai2;
+    vector<int> deck = createDeck();
+    vector<int> hand;
+    string name;
 
 
     Startscreen (play, tempf, windspeed, Windchill, dew, cloudb);
     if (play == 1) // when user enters 1 it starts the game
     {
         cout<<" Thank you for playing! The cards will distribute momentarily" << endl;
-        Deck(One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace);
+        Deck(deck, player, ai1, ai2, name, hand);
 
     }
 
@@ -271,32 +282,58 @@ void weathInput(double& tempf, double& dew, double& windspeed)
 void Instructions () // function for when the user inputs 3
 {
     cout<<"This game gives each player 7 random cards. The first person chosen will be able to place down the first card." << endl;
-    cout<<"The next player has to match or beat the card value of the highest card placed, or"<<endl;
-    cout<<"if the player cannot beat the highest card he/she must place the lowest card they have."<<endl;
-    cout<<"The person that placed the highest card wins that round which means they get to place the first card of the next round."<<endl;
-    cout<<"At the last round everybody places their last card the person with the lowest card wins.\n\n"<<endl;
+    cout<<"After the first player places their card, the next player must place a card higher or of similar value, "<<endl;
+    cout<<"the other players must do the same with the value the player before them placed."<<endl;
+    cout<<"If a player is unable to match or place a card of high value, he/she must place the lowest card they have."<<endl;
+    cout<<"The person that placed the highest card wins that round which makes them place the first card of the next round."<<endl;
+    cout<<"when everybody has one card, everybody places their last card, the person with the lowest card wins.\n\n"<<endl;
+
+    cout<<"Ace's have highest value despite having a value of 1"<<endl;
 
     cout<<"Would you like to Play"<<endl;
     cout<<"1 for yes, 2 for no, 3 for instructions"<<endl;
 }
 
-void Deck(int& One, int& Two, int& Three, int& Four, int& Five, int& Six, int& Seven, int& Eight, int& Nine, int& Ten, int& Jack, int& Queen, int& King, int& Ace)
+vector<int> createDeck() {
+    vector<int> deck;
+    for (int i = 2; i <= 14; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            deck.push_back(i);
+        }
+    }
+    return deck;
+}
+
+void shuffleDeck(vector<int>& deck)
 {
+    srand(time(0));
+    for (int i = deck.size() - 1; i > 0; --i) {
+        int j = rand() % (i + 1);
+        swap(deck[i], deck[j]);
+    }
+}
 
-    string deck [14] = {"One", "Two", " Three" , " Four",  "Five", " Six" , " Seven ", "Eight", "Nine", "Ten", "Jack", " Queen", " King", "Ace"};
-    One = 1;
-    Two = 2;
-    Three = 3;
-    Four = 4;
-    Five = 5;
-    Six = 6;
-    Seven = 7;
-    Eight = 8;
-    Nine = 9;
-    Ten = 10;
-    Jack = 11;
-    Queen = 12;
-    King = 13;
-    Ace = 14;
+void dealCards(const vector<int>& deck, vector<int>& player, vector<int>& ai1, vector<int>& ai2) {
+    for (int i = 0; i < 7; ++i) {
+        player.push_back(deck[i]);
+        ai1.push_back(deck[i + 7]);
+        ai2.push_back(deck[i + 14]);
+    }
+}
 
-} 
+void displayHand(const string& name, const vector<int>& hand) {
+    cout << name << "'s hand: ";
+    for (size_t i = 0; i < hand.size(); ++i) {
+        cout << hand[i] << " ";
+    }
+    cout << endl;
+}
+
+void Deck(const vector<int>& deck, vector<int>& player, vector<int>& ai1, vector<int>& ai2, const string& name, const vector<int>& hand)
+{
+    void shuffle(deck);
+    void deal(deck, player, ai1, ai2);
+    void Hand(name, hand);
+}
+
+
