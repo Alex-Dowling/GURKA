@@ -299,6 +299,4 @@ void Deck(int& One, int& Two, int& Three, int& Four, int& Five, int& Six, int& S
     King = 13;
     Ace = 14;
 
-
-
-}
+} 
