@@ -17,28 +17,29 @@ void Instructions ();
 void Deck(vector<int>& deck);
 void shuffleDeck(vector<int>& deck);
 void dealCards(const vector<int>& deck, vector<int>& player, vector<int>& ai1, vector<int>& ai2);
+void displayHand(const string& name, const vector<int>& hand);
 void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2);
 // Declared functions
 
 int main ()
 {
     double play;
-    double players;
     double tempf, windspeed, dew;
     double cloudb, Windchill;
-    vector<int> player, ai1, ai2;
+    vector<int> player, ai1, ai2, deck;
 
 
-    Startscreen (play, tempf, windspeed, Windchill, dew, cloudb);
+
+    Startscreen (play, tempf, windspeed, dew, cloudb, Windchill);
     if (play == 1) // when user enters 1 it starts the game
     {
-        cout<<" Thank you for playing! The cards will distribute momentarily" << endl;
+        cout<<" Thank you for playing! The cards will distribute momentarily" << endl << endl;
+        Deck(deck);
+        shuffleDeck(deck);
+        dealCards(deck, player, ai1, ai2);
+        displayCards(player, ai1, ai2);
+
     }
-
-
-void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2);
-
-
 
     if (play == 2) // if user enters 2 it will direct them to the notplay function and end the program
     {
@@ -51,7 +52,7 @@ void displayCards(const vector<int>& player, const vector<int>& ai1, const vecto
 
 void Startscreen (double& play, double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill)
 
-{ // function for startscreen
+{ // function for start screen
 
 cout<<"                                                WELCOME TO                                                           "<< endl;
 cout<<"         GGGGGGGGGGG  UUUUUUUU     UUUUUUUU  RRRRRRRRRRRRRRRR    KKKKKKKKK    KKKKKKK              AAA               "<< endl;
@@ -101,13 +102,13 @@ while (true)
     {
         Instructions ();
         cin.clear();
+        cout<<"Would you like to play?"<<endl;
+        cout<<"1 for yes, 2 for no\n"<<endl;
         cin>>play;
     }
 
     if (play == 1) // breaks and countinues in int main
     {
-
-
         break;
     }
 
@@ -135,6 +136,66 @@ void notplay () //function for when user inputs 2
     cout <<"Press enter to exit."<<endl;
 }
 
+void Instructions () // function for when the user inputs 3
+{
+    cout<<"This game gives each player 7 random cards. The first person chosen will be able to place down the first card." << endl;
+    cout<<"After the first player places their card, the next player must place a card higher or of similar value, "<<endl;
+    cout<<"the other players must do the same with the value the player before them placed."<<endl;
+    cout<<"If a player is unable to match or place a card of high value, he/she must place the lowest card they have."<<endl;
+    cout<<"The person that placed the highest card of that round wins and that allows them place the first card of the next round."<<endl;
+    cout<<"when everybody has one card, everybody places their last card, the person with the lowest card wins."<<endl;
+    cout<<"Ace's have highest value despite having a value of 1\n\n"<<endl;
+}
+
+void Deck(vector<int>& deck)
+{
+
+    for (int i = 2; i <= 14; ++i)
+    {
+        for (int j = 0; j < 4; ++j)
+        {
+            deck.push_back(i);
+        }
+    }
+    return;
+}
+
+void shuffleDeck(vector<int>& deck)
+{
+    srand(time(0));
+    for (int i = deck.size() - 1; i > 0; --i)
+    {
+        int j = rand() % (i + 1);
+        swap(deck[i], deck[j]);
+    }
+}
+
+void dealCards(const vector<int>& deck, vector<int>& player, vector<int>& ai1, vector<int>& ai2) {
+    for (int i = 0; i < 7; ++i)
+    {
+        player.push_back(deck[i]);
+        ai1.push_back(deck[i + 7]);
+        ai2.push_back(deck[i + 14]);
+    }
+}
+
+void displayHand(const string& name, const vector<int>& hand)
+{
+    cout << name << "'s hand: ";
+    for (size_t i = 0; i < hand.size(); ++i)
+    {
+    cout << hand[i] << " ";
+    }
+    cout << endl;
+}
+void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2)
+{
+    displayHand("User", player);
+    displayHand("Max", ai1);
+    displayHand("Nugget", ai2);
+}
+
+//do not type pass here________________________________________________________________________________________________________________________
 void groundwaterlyrics(){ // grounddwater lyrics function
     cout<<endl<<"GARDENER: Hey what happened to my water?"<<endl;
     cout<<"GROUNDHOG 1: There is something here that"<<endl;
@@ -276,57 +337,4 @@ void weathInput(double& tempf, double& dew, double& windspeed)
         cout<<"-------------|-------------"<<endl;
         cout<<" Cloud Base  |  "<<cloudb<<" ft"<<endl;
 
-}
-
-void Instructions () // function for when the user inputs 3
-{
-    cout<<"This game gives each player 7 random cards. The first person chosen will be able to place down the first card." << endl;
-    cout<<"After the first player places their card, the next player must place a card higher or of similar value, "<<endl;
-    cout<<"the other players must do the same with the value the player before them placed."<<endl;
-    cout<<"If a player is unable to match or place a card of high value, he/she must place the lowest card they have."<<endl;
-    cout<<"The person that placed the highest card of that round wins and that allows them place the first card of the next round."<<endl;
-    cout<<"when everybody has one card, everybody places their last card, the person with the lowest card wins."<<endl;
-    cout<<"Ace's have highest value despite having a value of 1\n\n"<<endl;
-
-    cout<<"Would you like to Play"<<endl;
-    cout<<"1 for yes, 2 for no, 3 for instructions"<<endl;
-}
-
-void Deck(vector<int>& deck)
-{
-
-    for (int i = 2; i <= 14; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            deck.push_back(i);
-        }
-    }
-    return;
-}
-
-
-
-
-void shuffleDeck(vector<int>& deck)
-{
-    srand(time(0));
-    for (int i = deck.size() - 1; i > 0; --i) {
-        int j = rand() % (i + 1);
-        swap(deck[i], deck[j]);
-    }
-}
-
-void dealCards(const vector<int>& deck, vector<int>& player, vector<int>& ai1, vector<int>& ai2) {
-    for (int i = 0; i < 7; ++i) {
-        player.push_back(deck[i]);
-        ai1.push_back(deck[i + 7]);
-        ai2.push_back(deck[i + 14]);
-    }
-}
-
-void displayHand(const string& name, const vector<int>& hand) {
-    cout << name << "'s hand: ";
-    for (size_t i = 0; i < hand.size(); ++i) {
-        cout << hand[i] << " ";
-    }
-    cout << endl;
 }
