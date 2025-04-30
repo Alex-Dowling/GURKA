@@ -6,7 +6,7 @@
 #include <cmath>
 using namespace std;
 
-void Startscreen (double& play, double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
+void Startscreen (double& play, double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill, double& helpnugget);
 void notplay ();
 void groundwaterlyrics();
 void weather(double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
@@ -19,21 +19,22 @@ void shuffleDeck(vector<int>& deck);
 void dealCards(const vector<int>& deck, vector<int>& player, vector<int>& ai1, vector<int>& ai2);
 void displayHand(const string& name, const vector<int>& hand);
 void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2);
+void Nugget(double& helpnugget);
 // Declared functions
 
 int main ()
 {
     double play;
-    double tempf, windspeed, dew;
+    double tempf, windspeed, dew, helpnugget;
     double cloudb, Windchill;
     vector<int> player, ai1, ai2, deck;
 
 
 
-    Startscreen (play, tempf, windspeed, dew, cloudb, Windchill);
+    Startscreen (play, tempf, windspeed, dew, cloudb, Windchill, helpnugget);
     if (play == 1) // when user enters 1 it starts the game
     {
-        cout<<" Thank you for playing! The cards will distribute momentarily" << endl << endl;
+        cout<<" Thank you for playing! The cards will distribute momentarily..." << endl << endl;
         Deck(deck);
         shuffleDeck(deck);
         dealCards(deck, player, ai1, ai2);
@@ -50,7 +51,7 @@ int main ()
     return 0;
 }
 
-void Startscreen (double& play, double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill)
+void Startscreen (double& play, double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill, double& helpnugget)
 
 { // function for start screen
 
@@ -91,11 +92,20 @@ while (true)
 
     if (play == 6) //directs you to waether program
     {
-    weather(tempf, windspeed, dew, cloudb, Windchill);
-    cout<<endl<<endl;
-    cout<<"Would you like to play?"<<endl;
-    cout<<"1 for yes, 2 for no, 3 for instructions\n"<<endl;
-    cin>>play;
+        weather(tempf, windspeed, dew, cloudb, Windchill);
+        cout<<endl<<endl;
+        cout<<"Would you like to play?"<<endl;
+        cout<<"1 for yes, 2 for no, 3 for instructions\n"<<endl;
+        cin>>play;
+    }
+
+    if (play == 1001)
+    {
+        Nugget(helpnugget);
+        cout<<endl<<endl;
+        cout<<"Would you like to play?"<<endl;
+        cout<<"1 for yes, 2 for no, 3 for instructions\n"<<endl;
+        cin>>play;
     }
 
     if (play == 3) //directs you to Instructions function
@@ -194,6 +204,11 @@ void displayCards(const vector<int>& player, const vector<int>& ai1, const vecto
     displayHand("Max", ai1);
     displayHand("Nugget", ai2);
 }
+
+
+
+
+
 
 //do not type pass here________________________________________________________________________________________________________________________
 void groundwaterlyrics(){ // grounddwater lyrics function
@@ -336,5 +351,27 @@ void weathInput(double& tempf, double& dew, double& windspeed)
         cout<<" Wind Chill  |  "<<Windchill<<" F"<<endl;
         cout<<"-------------|-------------"<<endl;
         cout<<" Cloud Base  |  "<<cloudb<<" ft"<<endl;
+
+}
+
+void Nugget (double& helpnugget)
+{
+    cout<<"WHAT!?!\nHELP ME!"<<endl;
+    cout<<"Press any number to like the video"<<endl;
+    cin>>helpnugget;
+    while (true)
+    {
+        if (cin.fail())
+        {
+            cin.clear();
+            cout<<"YOU KILLED NUGGET!!!!!"<<endl;
+            break;
+        }
+        else
+        {
+            cout<<endl<<"Gegagedigedagedago"<<endl<<endl;
+            break;
+        }
+    }
 
 }
