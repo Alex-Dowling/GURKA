@@ -4,6 +4,7 @@
 #include <ctime>
 #include <algorithm>
 #include <cmath>
+#include <windows.h>
 using namespace std;
 
 void Startscreen (double& play, double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill, double& helpnugget);
@@ -25,6 +26,7 @@ void Nugget(double& helpnugget);
 int main ()
 {
     double play;
+    int cards;
     double tempf, windspeed, dew, helpnugget;
     double cloudb, Windchill;
     vector<int> player, ai1, ai2, deck;
@@ -34,11 +36,14 @@ int main ()
     Startscreen (play, tempf, windspeed, dew, cloudb, Windchill, helpnugget);
     if (play == 1) // when user enters 1 it starts the game
     {
-        cout<<" Thank you for playing! The cards will distribute momentarily..." << endl << endl;
+        cout<<"\nThank you for playing! The cards will distribute momentarily..." << endl << endl;
         Deck(deck);
         shuffleDeck(deck);
         dealCards(deck, player, ai1, ai2);
         displayCards(player, ai1, ai2);
+
+        cout<<"\nPlace your card.\n" << endl;
+        cin>> cards;
 
     }
 
@@ -129,12 +134,12 @@ while (true)
     }
 
     else // anything else that the user inputs loops
-    {
-        cin.clear();
-        cin.ignore(10000, '\n');
-        cout<<"Please enter 1, 2 or 3"<<endl;
-        cin>>play;
-    }
+{
+    cin.clear();
+    cin.ignore(10000, '\n');
+    cout<<"Please enter 1, 2 or 3"<<endl;
+    cin>>play;
+}
 }
 }
 
@@ -143,7 +148,7 @@ void notplay () //function for when user inputs 2
 {
     cout<<"\n\nThank you for NOT playing Gurka!"<<endl;
     cout<<"Goodbye!"<<endl;
-    cout <<"Press enter to exit."<<endl;
+    cout<<"Press enter to exit."<<endl;
 }
 
 void Instructions () // function for when the user inputs 3
@@ -203,6 +208,7 @@ void displayCards(const vector<int>& player, const vector<int>& ai1, const vecto
     displayHand("User", player);
     displayHand("Max", ai1);
     displayHand("Nugget", ai2);
+
 }
 
 
@@ -265,6 +271,7 @@ void groundwaterlyrics(){ // grounddwater lyrics function
     cout<<"Now you are in the know. Don't forget the water down below"<<endl;
     cout<<"Don't forget the water down below"<<endl;
     cout<<"EVERYONE: Don't forget the water down beloooowwww"<<endl<<endl;
+    PlaySound("ground.WAV", NULL, SND_FILENAME);
 }
 
 void weather(double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill)
@@ -364,12 +371,12 @@ void Nugget (double& helpnugget)
         if (cin.fail())
         {
             cin.clear();
-            cout<<"YOU KILLED NUGGET!!!!!"<<endl;
+            cout<<endl<<"YOU KILLED NUGGET!!!!!"<<endl;
             break;
         }
         else
         {
-            cout<<endl<<"Gegagedigedagedago"<<endl<<endl;
+            cout<<endl<<"Gegagedigedagedago"<<endl;
             break;
         }
     }
