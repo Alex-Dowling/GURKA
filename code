@@ -21,6 +21,7 @@ void dealCards(const vector<int>& deck, vector<int>& player, vector<int>& ai1, v
 void displayHand(const string& name, const vector<int>& hand);
 void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2);
 void Nugget(double& helpnugget);
+void delay (int seconds);
 // Declared functions
 
 int main ()
@@ -29,6 +30,7 @@ int main ()
     int cards;
     double tempf, windspeed, dew, helpnugget;
     double cloudb, Windchill;
+    int seconds;
     vector<int> player, ai1, ai2, deck;
 
 
@@ -37,13 +39,23 @@ int main ()
     if (play == 1) // when user enters 1 it starts the game
     {
         cout<<"\nThank you for playing! The cards will distribute momentarily..." << endl << endl;
+
+        cout<<"3..."<< endl;
+        delay (1);
+        cout<<"2..."<<endl;
+        delay (1);
+        cout<<"1.."<<endl;
+        delay(1);
+        cout<<"Game Has Started..\n\n" << endl;
+    
+
         Deck(deck);
         shuffleDeck(deck);
         dealCards(deck, player, ai1, ai2);
         displayCards(player, ai1, ai2);
 
         cout<<"\nPlace your card.\n" << endl;
-        cin>> cards;
+
 
     }
 
@@ -208,6 +220,12 @@ void displayCards(const vector<int>& player, const vector<int>& ai1, const vecto
     displayHand("User", player);
     displayHand("Max", ai1);
     displayHand("Nugget", ai2);
+
+}
+void delay (int seconds)
+{
+    clock_t start_time = clock();
+    while (clock() < start_time + seconds * CLOCKS_PER_SEC);
 
 }
 
@@ -382,3 +400,4 @@ void Nugget (double& helpnugget)
     }
 
 }
+
