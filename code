@@ -208,13 +208,26 @@ void displayHand(const string& name, const vector<int>& hand)
     }
     cout << endl;
 }
+
 void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2)
 {
     displayHand("User", player);
-    displayHand("Max", ai1);
-    displayHand("Nugget", ai2);
 
+    cout << "Max's hand: ";
+    for (size_t i = 0; i < ai1.size(); ++i)
+    {
+        cout << "X ";
+    }
+    cout << endl;
+
+    cout << "Nugget's hand: ";
+    for (size_t i = 0; i < ai2.size(); ++i)
+    {
+        cout << "X ";
+    }
+    cout << endl;
 }
+
 void delay (int seconds)
 {
     clock_t start_time = clock();
