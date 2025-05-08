@@ -22,6 +22,7 @@ void displayHand(const string& name, const vector<int>& hand);
 void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2);
 void Nugget(double& helpnugget);
 void delay (int seconds);
+void playRound1(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won1);
 // Declared functions
 
 int main ()
@@ -30,7 +31,7 @@ int main ()
     int cards;
     double tempf, windspeed, dew, helpnugget;
     double cloudb, Windchill;
-    int seconds;
+    int seconds, won1, won2, won3, won4, won5, won6, won;
     vector<int> player, ai1, ai2, deck;
 
 
@@ -38,21 +39,13 @@ int main ()
     Startscreen (play, tempf, windspeed, dew, cloudb, Windchill, helpnugget);
     if (play == 1) // when user enters 1 it starts the game
     {
-        cout<<"\nThank you for playing! The cards will distribute momentarily..." << endl << endl;
-
-        cout<<"3..."<< endl;
-        delay (1);
-        cout<<"2..."<<endl;
-        delay (1);
-        cout<<"1.."<<endl;
-        delay(1);
         cout<<"Game Has Started..\n\n" << endl;
-    
 
         Deck(deck);
         shuffleDeck(deck);
         dealCards(deck, player, ai1, ai2);
         displayCards(player, ai1, ai2);
+        playRound1(player, ai1, ai2, won1);
 
         cout<<"\nPlace your card.\n" << endl;
 
@@ -227,6 +220,50 @@ void delay (int seconds)
     clock_t start_time = clock();
     while (clock() < start_time + seconds * CLOCKS_PER_SEC);
 
+}
+
+void playRound1(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won1)
+{
+    int playerCard;
+    cout << "\nPlace your card (Enter the index of the card in your hand): ";
+    cin >> playerCard;
+
+    while (playerCard < 1 || playerCard > static_cast<int>(player.size()))
+    {
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cout << "Invalid choice. Choose a valid card index (1 to " << player.size() << "): ";
+        cin >> playerCard;
+    }
+
+    int userCard = player[playerCard - 1];
+    player.erase(player.begin() + playerCard - 1);
+
+    int ai1Card = *max_element(ai1.begin(), ai1.end());
+    ai1.erase(find(ai1.begin(), ai1.end(), ai1Card));
+
+    int ai2Card = *max_element(ai2.begin(), ai2.end());
+    ai2.erase(find(ai2.begin(), ai2.end(), ai2Card));
+
+    cout << "User placed: " << userCard << endl;
+    cout << "Max placed: " << ai1Card << endl;
+    cout << "Nugget placed: " << ai2Card << endl;
+
+    int maxCard = userCard;
+    string winner = "User";
+
+    if (ai1Card >= maxCard)
+    {
+        maxCard = ai1Card;
+        winner = "Max";
+    }
+
+    if (ai2Card >= maxCard)
+    {
+        maxCard = ai2Card;
+        winner = "Nugget";
+    }
+    cout<<winner<<" won the round"<<endl;
 }
 
 
