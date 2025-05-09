@@ -22,7 +22,11 @@ void displayHand(const string& name, const vector<int>& hand);
 void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2);
 void Nugget(double& helpnugget);
 void delay (int seconds);
-void playRound1(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won1);
+void playRoundP(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard);
+void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong);
+void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard);
+void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard);
+void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard);
 // Declared functions
 
 int main ()
@@ -31,7 +35,7 @@ int main ()
     int cards;
     double tempf, windspeed, dew, helpnugget;
     double cloudb, Windchill;
-    int seconds, won1, won2, won3, won4, won5, won6, won;
+    int seconds, won, playerCard, wong;
     vector<int> player, ai1, ai2, deck;
 
 
@@ -45,9 +49,7 @@ int main ()
         shuffleDeck(deck);
         dealCards(deck, player, ai1, ai2);
         displayCards(player, ai1, ai2);
-        playRound1(player, ai1, ai2, won1);
-
-        cout<<"\nPlace your card.\n" << endl;
+        game(player, ai1, ai2, won, playerCard, wong);
 
 
     }
@@ -164,7 +166,7 @@ void Instructions () // function for when the user inputs 3
     cout<<"If a player is unable to match or place a card of high value, he/she must place the lowest card they have."<<endl;
     cout<<"The person that placed the highest card of that round wins and that allows them place the first card of the next round."<<endl;
     cout<<"when everybody has one card, everybody places their last card, the person with the lowest card wins."<<endl;
-    cout<<"Ace's have highest value despite having a value of 1\n\n"<<endl;
+    cout<<"Ace's have highest value of 14 despite having a value of 1\n\n"<<endl;
 }
 
 void Deck(vector<int>& deck)
@@ -208,26 +210,13 @@ void displayHand(const string& name, const vector<int>& hand)
     }
     cout << endl;
 }
-
 void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2)
 {
     displayHand("User", player);
+    displayHand("Max", ai1);
+    displayHand("Nugget", ai2);
 
-    cout << "Max's hand: ";
-    for (size_t i = 0; i < ai1.size(); ++i)
-    {
-        cout << "X ";
-    }
-    cout << endl;
-
-    cout << "Nugget's hand: ";
-    for (size_t i = 0; i < ai2.size(); ++i)
-    {
-        cout << "X ";
-    }
-    cout << endl;
 }
-
 void delay (int seconds)
 {
     clock_t start_time = clock();
@@ -235,9 +224,248 @@ void delay (int seconds)
 
 }
 
-void playRound1(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won1)
+void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong)
 {
-    int playerCard;
+    cout.clear();
+
+    playRoundP(player, ai1, ai2, won, playerCard);
+
+    while (player.size() > 1)
+    {
+        if (won == 1)
+        {
+            cout<<endl;
+            displayCards(player, ai1, ai2);
+            cout<<endl<<endl;
+            playRoundP(player, ai1, ai2, won, playerCard);
+        }
+
+        if (won == 2)
+        {
+            cout<<endl;
+            displayCards(player, ai1, ai2);
+            cout<<endl<<endl;
+            playRoundM(player, ai1, ai2, won, playerCard);
+        }
+
+        if (won == 3)
+        {
+            cout<<endl;
+            displayCards(player, ai1, ai2);
+            cout<<endl<<endl;
+            playRoundN(player, ai1, ai2, won, playerCard);
+        }
+    }
+
+    playRoundL(player, ai1, ai2, won, playerCard);
+
+}
+
+void playRoundP(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard)
+{
+    cout << "\nPlace your card (Enter the index of the card in your hand): ";
+    cin >> playerCard;
+
+    while (playerCard < 1 || playerCard > static_cast<int>(player.size()))
+    {
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cout << "Invalid choice. Choose a valid card index (1 to " << player.size() << "): ";
+        cin >> playerCard;
+    }
+
+    int userCard = player[playerCard - 1];
+    player.erase(player.begin() + playerCard - 1);
+    int maxCard = userCard;
+    int ai1Card, ai2Card;
+    string winner = "User";
+    won = 1;
+
+    if (*max_element(ai1.begin(), ai1.end()) >= maxCard)
+    {
+        ai1Card = *max_element(ai1.begin(), ai1.end());
+        ai1.erase(find(ai1.begin(), ai1.end(), ai1Card));
+    }
+
+
+    if (*max_element(ai1.begin(), ai1.end()) < maxCard)
+    {
+        ai1Card = *min_element(ai1.begin(), ai1.end());
+        ai1.erase(find(ai1.begin(), ai1.end(), ai1Card));
+    }
+
+    if (ai1Card >= maxCard)
+    {
+        maxCard = ai1Card;
+        winner = "Max";
+        won = 2;
+    }
+
+    if (*max_element(ai2.begin(), ai2.end()) >= maxCard)
+    {
+        ai2Card = *max_element(ai2.begin(), ai2.end());
+        ai2.erase(find(ai2.begin(), ai2.end(), ai2Card));
+    }
+
+
+    if (*max_element(ai2.begin(), ai2.end()) < maxCard)
+    {
+        ai2Card = *min_element(ai2.begin(), ai2.end());
+        ai2.erase(find(ai2.begin(), ai2.end(), ai2Card));
+    }
+
+    if (ai2Card >= maxCard)
+    {
+        maxCard = ai2Card;
+        winner = "Nugget";
+        won = 3;
+    }
+
+    cout << "User placed: " << userCard << endl<< endl;
+    cout << "Max placed: " << ai1Card << endl<< endl;
+    cout << "Nugget placed: " << ai2Card << endl<< endl;
+
+    cout<<winner<<" won the round"<< endl << endl;;
+}
+
+void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard)
+{
+    int ai2Card, userCard;
+
+    int ai1Card = *max_element(ai1.begin(), ai1.end());
+    ai1.erase(find(ai1.begin(), ai1.end(), ai1Card));
+    cout << "Max placed: " << ai1Card << endl<< endl;
+    int maxCard = ai1Card;
+
+    if (*max_element(ai2.begin(), ai2.end()) >= maxCard)
+    {
+        ai2Card = *max_element(ai2.begin(), ai2.end());
+        ai2.erase(find(ai2.begin(), ai2.end(), ai2Card));
+    }
+
+    if (*max_element(ai2.begin(), ai2.end()) < maxCard)
+    {
+        ai2Card = *min_element(ai2.begin(), ai2.end());
+        ai2.erase(find(ai2.begin(), ai2.end(), ai2Card));
+    }
+    cout << "Nugget placed: " << ai2Card << endl<< endl;
+
+
+    cout << "\nPlace your card (Enter the index of the card in your hand): "<<endl;
+    if (*max_element(player.begin(), player.end()) < maxCard)
+    {
+        cout << "You must place your lowest card since you can't match or beat the highest card"<<endl;
+        userCard = *min_element(player.begin(), player.end());
+        player.erase(find(player.begin(), player.end(), playerCard));
+    }
+
+    else
+    {
+        cin >> playerCard;
+
+        while (playerCard < 1 || playerCard > static_cast<int>(player.size()))
+        {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "Invalid choice. Choose a valid card index (1 to " << player.size() << "): ";
+            cin >> playerCard;
+        }
+
+        int userCard = player[playerCard - 1];
+        player.erase(player.begin() + playerCard - 1);
+    }
+
+    cout << "User placed: " << userCard << endl<< endl;
+
+
+
+    string winner = "Max";
+    won = 2;
+
+    if (ai2Card >= maxCard)
+    {
+        maxCard = ai2Card;
+        winner = "Nugget";
+        won = 3;
+    }
+
+    if (playerCard >= maxCard)
+    {
+        maxCard = userCard;
+        winner = "User";
+        won = 1;
+    }
+    cout<<winner<<" won the round"<<endl;
+}
+
+void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard)
+{
+    int ai2Card = *max_element(ai2.begin(), ai2.end());
+    ai2.erase(find(ai2.begin(), ai2.end(), ai2Card));
+    cout << "Nugget placed: " << ai2Card << endl<< endl;
+    int maxCard = ai2Card;
+    int userCard, ai1Card;
+    string winner = "Nugget";
+    won = 3;
+
+    cout << "\nPlace your card (Enter the index of the card in your hand): "<<endl;
+    if (*max_element(player.begin(), player.end()) < maxCard)
+    {
+        cout << "You must place your lowest card since you can't match or beat the highest card"<<endl;
+        userCard = *min_element(player.begin(), player.end());
+        player.erase(find(player.begin(), player.end(), playerCard));
+    }
+
+    else
+    {
+        cin >> playerCard;
+
+        while (playerCard < 1 || playerCard > static_cast<int>(player.size()))
+        {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "Invalid choice. Choose a valid card index (1 to " << player.size() << "): ";
+            cin >> playerCard;
+        }
+
+        int userCard = player[playerCard - 1];
+        player.erase(player.begin() + playerCard - 1);
+        int maxCard = userCard;
+    }
+    if (*max_element(ai1.begin(), ai1.end()) >= maxCard)
+    {
+        ai1Card = *max_element(ai1.begin(), ai1.end());
+        ai1.erase(find(ai1.begin(), ai1.end(), ai1Card));
+    }
+
+    if (*max_element(ai1.begin(), ai1.end()) < maxCard)
+    {
+        ai1Card = *min_element(ai1.begin(), ai1.end());
+        ai1.erase(find(ai1.begin(), ai1.end(), ai1Card));
+    }
+    cout << "User placed: " << userCard << endl<< endl;
+    cout << "Max placed: " << ai1Card << endl<< endl;
+
+
+
+    if (userCard >= maxCard)
+    {
+        maxCard = userCard;
+        winner = "User";
+        won = 1;
+    }
+
+    if (ai1Card >= maxCard)
+    {
+        maxCard = ai1Card;
+        winner = "Max";
+        won = 2;
+    }
+    cout<<winner<<" won the round"<<endl;
+}
+
+void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard)
+{
     cout << "\nPlace your card (Enter the index of the card in your hand): ";
     cin >> playerCard;
 
@@ -258,25 +486,28 @@ void playRound1(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
     int ai2Card = *max_element(ai2.begin(), ai2.end());
     ai2.erase(find(ai2.begin(), ai2.end(), ai2Card));
 
-    cout << "User placed: " << userCard << endl;
-    cout << "Max placed: " << ai1Card << endl;
-    cout << "Nugget placed: " << ai2Card << endl;
+    cout << "User placed: " << userCard << endl<< endl;
+    cout << "Max placed: " << ai1Card << endl<< endl;
+    cout << "Nugget placed: " << ai2Card << endl<< endl;
 
-    int maxCard = userCard;
+    int lowCard = userCard;
     string winner = "User";
+    wong = 1;
 
-    if (ai1Card >= maxCard)
+    if (ai1Card <= lowCard)
     {
-        maxCard = ai1Card;
+        lowCard = ai1Card;
         winner = "Max";
+        wong = 2;
     }
 
-    if (ai2Card >= maxCard)
+    if (ai2Card <= lowCard)
     {
-        maxCard = ai2Card;
+        lowCard = ai2Card;
         winner = "Nugget";
+        wong = 3;
     }
-    cout<<winner<<" won the round"<<endl;
+    cout<<winner<<" won the Game"<< endl << endl;;
 }
 
 
