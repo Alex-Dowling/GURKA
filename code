@@ -7,7 +7,7 @@
 #include <windows.h>
 using namespace std;
 
-void Startscreen (double& play, double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill, double& helpnugget);
+void Startscreen (double& play, double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
 void notplay ();
 void groundwaterlyrics();
 void weather(double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
@@ -22,10 +22,10 @@ void displayHand(const string& name, const vector<int>& hand);
 void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2);
 void Nugget(double& helpnugget);
 void playRoundP(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard);
-void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck);
+void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck, double& helpnugget);
 void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard);
 void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard);
-void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard);
+void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard, int& won, vector<int>& deck, double& helpnugget);
 // Declared functions
 
 int main ()
@@ -39,10 +39,10 @@ int main ()
 
 
 
-    Startscreen (play, tempf, windspeed, dew, cloudb, Windchill, helpnugget);
+    Startscreen (play, tempf, windspeed, dew, cloudb, Windchill);
     if (play == 1) // when user enters 1 it starts the game
     {
-        game(player, ai1, ai2, won, playerCard, wong, deck);
+        game(player, ai1, ai2, won, playerCard, wong, deck, helpnugget);
     }
 
     if (play == 2) // if user enters 2 it will direct them to the notplay function and end the program
@@ -54,7 +54,7 @@ int main ()
     return 0;
 }
 
-void Startscreen (double& play, double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill, double& helpnugget)
+void Startscreen (double& play, double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill)
 
 { // function for start screen
 
@@ -96,15 +96,6 @@ while (true)
     if (play == 6) //directs you to waether program
     {
         weather(tempf, windspeed, dew, cloudb, Windchill);
-        cout<<endl<<endl;
-        cout<<"Would you like to play?"<<endl;
-        cout<<"1 for yes, 2 for no, 3 for instructions\n"<<endl;
-        cin>>play;
-    }
-
-    if (play == 1001)
-    {
-        Nugget(helpnugget);
         cout<<endl<<endl;
         cout<<"Would you like to play?"<<endl;
         cout<<"1 for yes, 2 for no, 3 for instructions\n"<<endl;
@@ -207,7 +198,7 @@ void displayCards(const vector<int>& player, const vector<int>& ai1, const vecto
 }
 
 
-void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck)
+void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck, double& helpnugget)
 {
     system("cls");
     cout<<"Game Has Started..\n\n" << endl;
@@ -217,8 +208,12 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
     displayCards(player, ai1, ai2);
     playRoundP(player, ai1, ai2, won, playerCard);
 
-    while (player.size() > 1)
+    while (true)
     {
+        if (player.size() == 1)
+        {
+            break;
+        }
         if (won == 1)
         {
             cout<<endl;
@@ -244,7 +239,8 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
         }
     }
 
-    playRoundL(player, ai1, ai2, won, playerCard);
+    displayCards(player, ai1, ai2);
+    playRoundL(player, ai1, ai2, won, playerCard, won, deck, helpnugget);
 
 }
 
@@ -462,10 +458,11 @@ void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
     cin.get();
 }
 
-void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard)
+void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard, int& won, vector<int>& deck, double& helpnugget)
 {
     cout << "\nPlace your card (Enter the index of the card in your hand): ";
     cin >> playerCard;
+    int playagain;
 
     while (playerCard < 1 || playerCard > static_cast<int>(player.size()))
     {
@@ -492,20 +489,49 @@ void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
     string winner = "User";
     wong = 1;
 
-    if (ai1Card << lowCard)
+    if (ai1Card < lowCard)
     {
         lowCard = ai1Card;
         winner = "Max";
         wong = 2;
     }
 
-    if (ai2Card << lowCard)
+    if (ai2Card < lowCard)
     {
         lowCard = ai2Card;
         winner = "Nugget";
         wong = 3;
     }
-    cout<<winner<<" won the Game"<< endl << endl;;
+    cout<<winner<<" won the Game"<< endl << endl;
+
+    cout<<"Would you like to play again"<<endl<<endl;
+    cout<<"1 for yes, 2 for no"<<endl;
+    cin>>playagain;
+    while (true)
+    {
+        if (playagain == 1)
+        {
+            game(player, ai1, ai2, won, playerCard, wong, deck, helpnugget);
+        }
+        if (playagain == 2)
+        {
+            cout<<"Thank you for Playing"<<endl;
+            break;
+        }
+        if (playagain == 1001)
+        {
+            Nugget(helpnugget);
+            cout<<endl<<endl;
+            break;
+        }
+        else
+        {
+            cin.clear();
+            cin.ignore();
+            cout<<"Please enter 1 or 2"<<endl;
+            cin>>playagain;
+        }
+    }
 }
 
 
