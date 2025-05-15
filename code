@@ -28,7 +28,6 @@ void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
 int main ()
 {
     double play;
-    int cards;
     double tempf, windspeed, dew, helpnugget;
     double cloudb, Windchill;
     int won, playerCard, wong;
@@ -552,7 +551,7 @@ void groundwaterlyrics(){ // grounddwater lyrics function
     cout<<"GROUNDHOG 2: The story of water from down belooooww."<<endl;
     cout<<"GROUNDWATER: Ooh I'm groundwater, I'm all"<<endl;
     cout<<"around, most of your water is under ground"<<endl;
-    cout<<"the water we have is all the2 same"<<endl;
+    cout<<"the water we have is all the same"<<endl;
     cout<<"I'm used over and over again"<<endl;
     cout<<"[music]"<<endl;
     cout<<"I surrounded the castle with a watery moat"<<endl;
@@ -561,7 +560,7 @@ void groundwaterlyrics(){ // grounddwater lyrics function
     cout<<"now I'm the cool, that fills your swimming pool."<<endl;
     cout<<"GROUNDHOGS: Feel the drops of snow and rain"<<endl;
     cout<<"an age old cycle again and again"<<endl;
-    cout<<"groundwater under the ground - "<<endl;
+    cout<<"groundwater under the ground - " <<endl;
     cout<<"groundwater flowing down"<<endl;
     cout<<"in the ground - groundwater"<<endl;
     cout<<"all around - Groundwater"<<endl;
