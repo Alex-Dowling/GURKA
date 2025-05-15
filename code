@@ -545,6 +545,7 @@ void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
 
 //do not type pass here________________________________________________________________________________________________________________________
 void groundwaterlyrics(){ // grounddwater lyrics function
+    system("cls");
     cout<<endl<<"GARDENER: Hey what happened to my water?"<<endl;
     cout<<"GROUNDHOG 1: There is something here that"<<endl;
     cout<<"you should knoooooww."<<endl;
@@ -603,6 +604,7 @@ void groundwaterlyrics(){ // grounddwater lyrics function
 
 void weather(double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill)
 {
+    system("cls");
     // Table defining use of Program
     cout<<" ___________________________________________________"<<endl;
     cout<<"|                                                   |"<<endl;
