@@ -210,16 +210,16 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
 
     while (true)
     {
-        if (player.size() == 1)
-        {
-            break;
-        }
         if (won == 1)
         {
             cout<<endl;
             displayCards(player, ai1, ai2);
             cout<<endl<<endl;
             playRoundP(player, ai1, ai2, won, playerCard);
+            if (player.size() == 1)
+            {
+                break;
+            }
         }
 
         if (won == 2)
@@ -228,6 +228,10 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
             displayCards(player, ai1, ai2);
             cout<<endl<<endl;
             playRoundM(player, ai1, ai2, won, playerCard);
+            if (player.size() == 1)
+            {
+                break;
+            }
         }
 
         if (won == 3)
@@ -236,6 +240,10 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
             displayCards(player, ai1, ai2);
             cout<<endl<<endl;
             playRoundN(player, ai1, ai2, won, playerCard);
+            if (player.size() == 1)
+            {
+                break;
+            }
         }
     }
 
@@ -515,6 +523,7 @@ void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
         }
         if (playagain == 2)
         {
+            cout<<"Thank you for Playing"<<endl;
             break;
         }
         if (playagain == 1001)
@@ -546,7 +555,7 @@ void groundwaterlyrics(){ // grounddwater lyrics function
     cout<<"GROUNDHOG 2: The story of water from down belooooww."<<endl;
     cout<<"GROUNDWATER: Ooh I'm groundwater, I'm all"<<endl;
     cout<<"around, most of your water is under ground"<<endl;
-    cout<<"the water we have is all the same"<<endl;
+    cout<<"the water we have is all the2 same"<<endl;
     cout<<"I'm used over and over again"<<endl;
     cout<<"[music]"<<endl;
     cout<<"I surrounded the castle with a watery moat"<<endl;
