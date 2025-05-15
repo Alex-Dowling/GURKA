@@ -175,11 +175,11 @@ void shuffleDeck(vector<int>& deck)
 }
 
 void dealCards(const vector<int>& deck, vector<int>& player, vector<int>& ai1, vector<int>& ai2) {
-    for (int i = 0; i < 7; ++i)
+    for (int i = 0; i < 6; ++i)
     {
         player.push_back(deck[i]);
-        ai1.push_back(deck[i + 7]);
-        ai2.push_back(deck[i + 14]);
+        ai1.push_back(deck[i + 6]);
+        ai2.push_back(deck[i + 12]);
     }
 }
 
@@ -210,16 +210,16 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
 
     while (true)
     {
-        if (player.size() == 1)
-        {
-            break;
-        }
         if (won == 1)
         {
             cout<<endl;
             displayCards(player, ai1, ai2);
             cout<<endl<<endl;
             playRoundP(player, ai1, ai2, won, playerCard);
+            if (player.size() == 1)
+            {
+                break;
+            }
         }
 
         if (won == 2)
@@ -228,6 +228,10 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
             displayCards(player, ai1, ai2);
             cout<<endl<<endl;
             playRoundM(player, ai1, ai2, won, playerCard);
+            if (player.size() == 1)
+            {
+                break;
+            }
         }
 
         if (won == 3)
@@ -236,6 +240,10 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
             displayCards(player, ai1, ai2);
             cout<<endl<<endl;
             playRoundN(player, ai1, ai2, won, playerCard);
+            if (player.size() == 1)
+            {
+                break;
+            }
         }
     }
 
@@ -547,7 +555,7 @@ void groundwaterlyrics(){ // grounddwater lyrics function
     cout<<"GROUNDHOG 2: The story of water from down belooooww."<<endl;
     cout<<"GROUNDWATER: Ooh I'm groundwater, I'm all"<<endl;
     cout<<"around, most of your water is under ground"<<endl;
-    cout<<"the water we have is all the same"<<endl;
+    cout<<"the water we have is all the2 same"<<endl;
     cout<<"I'm used over and over again"<<endl;
     cout<<"[music]"<<endl;
     cout<<"I surrounded the castle with a watery moat"<<endl;
@@ -705,4 +713,3 @@ void Nugget (double& helpnugget)
     }
 
 }
-
