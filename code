@@ -11,9 +11,6 @@ void Startscreen (double& play, double& tempf, double& windspeed, double& dew, d
 void notplay ();
 void groundwaterlyrics();
 void weather(double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
-void weathInput (double& tempf, double& windspeed, double& dew);
-void weathcalculate (double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
-void weathDisplay (double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
 void Instructions ();
 void Deck(vector<int>& deck);
 void shuffleDeck(vector<int>& deck);
@@ -615,18 +612,6 @@ void weather(double& tempf, double& windspeed, double& dew, double& cloudb, doub
     cout<<"| point in Fahrenheit, and wind speed to start      |"<<endl;
     cout<<"|___________________________________________________|"<<endl;
 
-
-    // Bringing back the values from the main function
-    weathInput(tempf, dew, windspeed);
-
-    weathcalculate(tempf, windspeed, dew, cloudb, Windchill);
-
-    weathDisplay(tempf, windspeed, dew, cloudb, Windchill);
-}
-
-void weathInput(double& tempf, double& dew, double& windspeed)
-    {
-
         // Asking for Temperature
         cout<<endl<<"Temperature in Fahrenheit: ";
         cin>>tempf;
@@ -668,18 +653,11 @@ void weathInput(double& tempf, double& dew, double& windspeed)
             cin>>windspeed;
             }
         cout<<endl<<endl;
-}
 
-    void weathcalculate(double& tempf, double& windspeed, double& dew, double& cloudb,  double& Windchill)
-{
         cloudb = ((tempf - dew) / 4.4) * 1000;
         Windchill = 35.74 + ((0.6215 * tempf) - (35.75 * (pow(windspeed, 0.16)))) + (0.4275 * tempf * (pow(windspeed, 0.16)));
 
-}
 
-    //Displaying output
-    void weathDisplay(double& tempf, double& windspeed, double& dew, double& cloudb,  double& Windchill)
-{
         cout<<" Temperature |  "<<tempf<<" F"<<endl;
         cout<<"-------------|-------------"<<endl;
         cout<<"  Dew Point  |  "<<dew<<" F"<<endl;
@@ -713,4 +691,3 @@ void Nugget (double& helpnugget)
     }
 
 }
-
