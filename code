@@ -254,7 +254,7 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
 
 void playRoundP(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard)
 {
-    cout << "\nPlace your card (Enter the index of the card in your hand): ";
+    cout << "\nPlace your card (Enter The Number Position of The Card You Want to Place): ";
     cin >> playerCard;
 
     while (playerCard < 1 || playerCard > static_cast<int>(player.size()))
@@ -323,11 +323,11 @@ void playRoundP(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
         won = 3;
     }
 
-    cout << "User placed: " << userCard << endl<< endl;
-    cout << "Max placed: " << ai1Card << endl<< endl;
-    cout << "Nugget placed: " << ai2Card << endl<< endl;
+    cout << "\nUser placed: " << userCard << endl<< endl;
+    cout << "\nMax placed: " << ai1Card << endl<< endl;
+    cout << "\nNugget placed: " << ai2Card << endl<< endl;
 
-    cout <<winner<<" won the round"<< endl;
+    cout <<winner<<" won the round\n"<< endl;
 
     cout <<"Press enter to continue to the next round"<< endl<< endl;
     cin.ignore();
@@ -341,7 +341,7 @@ void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
     int ai1Card = *max_element(ai1.begin(), ai1.end());
     ai1.erase(find(ai1.begin(), ai1.end(), ai1Card));
 
-    cout << "Max placed: " << ai1Card << endl<< endl;
+    cout << "\nMax placed: " << ai1Card << endl<< endl;
     int maxCard = ai1Card;
 
     string winner = "Max";
@@ -363,7 +363,7 @@ void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
         break;
         }
     }
-    cout << "Nugget placed: " << ai2Card << endl<< endl;
+    cout << "\nNugget placed: " << ai2Card << endl<< endl;
 
     if (ai2Card >= maxCard)
     {
@@ -373,7 +373,7 @@ void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
     }
 
 
-    cout << "\nPlace your card (Enter the index of the card in your hand): "<<endl;
+    cout << "\nPlace your card (Enter The Number Position of The Card You Want to Place): "<<endl;
     cin >> playerCard;
 
         while (playerCard < 1 || playerCard > static_cast<int>(player.size()))
@@ -388,7 +388,7 @@ void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
         player.erase(player.begin() + playerCard - 1);
 
 
-    cout << "User placed: " << userCard << endl<< endl;
+    cout << "\nUser placed: " << userCard << endl<< endl;
 
     if (userCard >= maxCard)
     {
@@ -396,7 +396,7 @@ void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
         winner = "User";
         won = 1;
     }
-    cout<<winner<<" won the round"<<endl;
+    cout<<winner<<" won the round\n"<<endl;
     cout <<"Press enter to continue to the next round"<< endl<< endl;
     cin.ignore();
     cin.get();
@@ -406,13 +406,13 @@ void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
 {
     int ai2Card = *max_element(ai2.begin(), ai2.end());
     ai2.erase(find(ai2.begin(), ai2.end(), ai2Card));
-    cout << "Nugget placed: " << ai2Card << endl<< endl;
+    cout << "\nNugget placed: " << ai2Card << endl<< endl;
     int maxCard = ai2Card;
     int userCard, ai1Card;
     string winner = "Nugget";
     won = 3;
 
-    cout << "\nPlace your card (Enter the index of the card in your hand): "<<endl;
+    cout << "\nPlace your card (Enter The Number Position of The Card You Want to Place  ): "<<endl;
 
         cin >> playerCard;
 
@@ -451,8 +451,8 @@ void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
             break;
         }
     }
-    cout << "User placed: " << userCard << endl<< endl;
-    cout << "Max placed: " << ai1Card << endl<< endl;
+    cout << "\nUser placed: " << userCard << endl<< endl;
+    cout << "\nMax placed: " << ai1Card << endl<< endl;
 
     if (ai1Card >= maxCard)
     {
@@ -460,7 +460,7 @@ void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
         winner = "Max";
         won = 2;
     }
-    cout<<winner<<" won the round"<<endl;
+    cout<<winner<<" won the round\n"<<endl;
     cout <<"Press enter to continue to the next round"<< endl<< endl;
     cin.ignore();
     cin.get();
@@ -468,7 +468,7 @@ void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
 
 void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard, int& won, vector<int>& deck, double& helpnugget)
 {
-    cout << "\nPlace your card (Enter the index of the card in your hand): ";
+    cout << "\nPlace your card (Enter The Number Position of The Card You Want to Place): ";
     cin >> playerCard;
     int playagain;
 
@@ -489,9 +489,9 @@ void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
     int ai2Card = *max_element(ai2.begin(), ai2.end());
     ai2.erase(find(ai2.begin(), ai2.end(), ai2Card));
 
-    cout << "User placed: " << userCard << endl<< endl;
-    cout << "Max placed: " << ai1Card << endl<< endl;
-    cout << "Nugget placed: " << ai2Card << endl<< endl;
+    cout << "\nUser placed: " << userCard << endl<< endl;
+    cout << "\nMax placed: " << ai1Card << endl<< endl;
+    cout << "\nNugget placed: " << ai2Card << endl<< endl;
 
     int lowCard = userCard;
     string winner = "User";
@@ -510,7 +510,7 @@ void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
         winner = "Nugget";
         wong = 3;
     }
-    cout<<winner<<" won the Game"<< endl << endl;
+    cout<<winner<<" won the Game\n"<< endl << endl;
 
     cout<<"Would you like to play again"<<endl<<endl;
     cout<<"1 for yes, 2 for no"<<endl;
@@ -713,3 +713,4 @@ void Nugget (double& helpnugget)
     }
 
 }
+
