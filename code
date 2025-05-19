@@ -18,12 +18,12 @@ void shuffleDeck(vector<int>& deck);
 void dealCards(const vector<int>& deck, vector<int>& player, vector<int>& ai1, vector<int>& ai2);
 void displayHand(const string& name, const vector<int>& hand);
 void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2);
-void Nugget(double& helpnugget);
+void Nugget();
 void playRoundP(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard);
-void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck, double& helpnugget);
+void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck);
 void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard);
 void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard);
-void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard, int& won, vector<int>& deck, double& helpnugget);
+void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard, int& won, vector<int>& deck);
 
 
 
@@ -40,7 +40,7 @@ int main ()
 
     if (play == 1) // when user enters 1 it starts the game
     {
-        game(player, ai1, ai2, won, playerCard, wong, deck, helpnugget);
+        game(player, ai1, ai2, won, playerCard, wong, deck);
     }
 
     if (play == 2) // if user enters 2 it will direct them to the notplay function and end the program
@@ -54,7 +54,7 @@ int main ()
 
 
 
-void Startscreen (double& play, double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill)
+void Startscreen (double& play)
 
 
 // function for start screen
@@ -97,7 +97,7 @@ while (true)
 
     if (play == 6) //directs you to waether program easter egg
     {
-        weather(tempf, windspeed, dew, cloudb, Windchill);
+        weather();
         cout<<endl;
         cout<<"Would you like to play?"<<endl;
         cout<<"1 for yes, 2 for no, 3 for instructions\n"<<endl;
@@ -213,7 +213,7 @@ void displayCards(const vector<int>& player, const vector<int>& ai1, const vecto
 
 
 
-void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck, double& helpnugget) //This is the actual game
+void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck) //This is the actual game
 
 {
     system("cls");
@@ -272,7 +272,7 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
 
     //Last round
     displayCards(player, ai1, ai2);
-    playRoundL(player, ai1, ai2, won, playerCard, won, deck, helpnugget);
+    playRoundL(player, ai1, ai2, won, playerCard, won, deck);
 
 }
 
@@ -498,7 +498,7 @@ void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
 }
 
 //Function for the Last round
-void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard, int& won, vector<int>& deck, double& helpnugget)
+void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard, int& won, vector<int>& deck)
 {
     cout << "\nPlace your card (Enter The Number Position of The Card You Want to Place): ";
     cin >> playerCard;
@@ -552,7 +552,7 @@ void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
     {
         if (playagain == 1)
         {
-            game(player, ai1, ai2, won, playerCard, wong, deck, helpnugget);
+            game(player, ai1, ai2, won, playerCard, wong, deck);
         }
         if (playagain == 2)
         {
@@ -562,7 +562,7 @@ void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
         //easter egg
         if (playagain == 1001)
         {
-            Nugget(helpnugget);
+            Nugget();
             cout<<endl<<endl;
             break;
         }
@@ -641,7 +641,7 @@ void groundwaterlyrics(){ // groundwater easter egg function
 }
 
 // Function for the weather program easter egg
-void weather(double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill)
+void weather()
 {
     double tempf, windspeed, dew;
     double cloudb, Windchill;
