@@ -358,6 +358,7 @@ void playRoundP(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
     cout <<"Press enter to continue to the next round"<< endl<< endl;
     cin.ignore();
     cin.get();
+    cout<<"_______________________________________________________________"<<endl<<endl<<endl;
 }
 
 
@@ -430,6 +431,7 @@ void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
     cout <<"Press enter to continue to the next round"<< endl<< endl;
     cin.ignore();
     cin.get();
+    cout<<"_______________________________________________________________"<<endl<<endl<<endl;
 }
 
 //Function for when Nugget wins a round
@@ -495,6 +497,7 @@ void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
     cout <<"Press enter to continue to the next round"<< endl<< endl;
     cin.ignore();
     cin.get();
+    cout<<"_______________________________________________________________"<<endl<<endl<<endl;
 }
 
 //Function for the Last round
