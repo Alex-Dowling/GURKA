@@ -8,10 +8,10 @@
 using namespace std;
 
 // Declared functions
-void Startscreen (double& play, double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
+void Startscreen (double& play);
 void notplay ();
 void groundwaterlyrics();
-void weather(double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
+void weather();
 void Instructions ();
 void Deck(vector<int>& deck);
 void shuffleDeck(vector<int>& deck);
@@ -31,15 +31,13 @@ int main ()
 {
     // Defining variables
     double play;
-    double tempf, windspeed, dew, helpnugget;
-    double cloudb, Windchill;
     int won, playerCard, wong;
     vector<int> player, ai1, ai2, deck;
 
 
-
     // Starting the code
-    Startscreen (play, tempf, windspeed, dew, cloudb, Windchill);
+    Startscreen (play);
+
     if (play == 1) // when user enters 1 it starts the game
     {
         game(player, ai1, ai2, won, playerCard, wong, deck, helpnugget);
@@ -60,7 +58,7 @@ void Startscreen (double& play, double& tempf, double& windspeed, double& dew, d
 
 
 // function for start screen
-{ 
+{
 cout<<"                                                WELCOME TO                                                           "<< endl;
 cout<<"         GGGGGGGGGGG  UUUUUUUU     UUUUUUUU  RRRRRRRRRRRRRRRR    KKKKKKKKK    KKKKKKK              AAA               "<< endl;
 cout<<"     GGG::::::::::::G U::::::U     U::::::U R::::::::::::::::R   K:::::::K    K:::::K             A:::A              "<< endl;
@@ -86,7 +84,7 @@ cin>>play;
 
 while (true)
 {
-    if (play == 2006) //directs you to groundwater lyrics
+    if (play == 2006) //directs you to groundwater easter egg
     {
         groundwaterlyrics();
         cout<<endl;
@@ -97,15 +95,14 @@ while (true)
 
 
 
-    if (play == 6) //directs you to waether program
+    if (play == 6) //directs you to waether program easter egg
     {
         weather(tempf, windspeed, dew, cloudb, Windchill);
-        cout<<endl<<endl;
+        cout<<endl;
         cout<<"Would you like to play?"<<endl;
         cout<<"1 for yes, 2 for no, 3 for instructions\n"<<endl;
         cin>>play;
     }
-
 
     if (play == 3) //directs you to Instructions function
     {
@@ -209,13 +206,15 @@ void displayHand(const string& name, const vector<int>& hand) //Displays the Car
 
 
 
-void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2)
+void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2) // Displays the cards to the Player
 {
     displayHand("User", player);
 }
 
 
-void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck, double& helpnugget)
+
+void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck, double& helpnugget) //This is the actual game
+
 {
     system("cls");
     cout<<"Game Has Started..\n\n" << endl;
@@ -225,6 +224,7 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
     displayCards(player, ai1, ai2);
     playRoundP(player, ai1, ai2, won, playerCard);
 
+    // Loop for the rounds
     while (true)
     {
         if (won == 1)
@@ -233,6 +233,8 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
             displayCards(player, ai1, ai2);
             cout<<endl<<endl;
             playRoundP(player, ai1, ai2, won, playerCard);
+
+            // Break for last round
             if (player.size() == 1)
             {
                 break;
@@ -245,6 +247,8 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
             displayCards(player, ai1, ai2);
             cout<<endl<<endl;
             playRoundM(player, ai1, ai2, won, playerCard);
+
+            // Break for last round
             if (player.size() == 1)
             {
                 break;
@@ -257,6 +261,8 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
             displayCards(player, ai1, ai2);
             cout<<endl<<endl;
             playRoundN(player, ai1, ai2, won, playerCard);
+
+            // Break for last round
             if (player.size() == 1)
             {
                 break;
@@ -264,11 +270,14 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
         }
     }
 
+    //Last round
     displayCards(player, ai1, ai2);
     playRoundL(player, ai1, ai2, won, playerCard, won, deck, helpnugget);
 
 }
 
+
+// Function for first round and if the user won a round
 void playRoundP(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard)
 {
     cout << "\nPlace your card (Enter The Number Position of The Card You Want to Place): ";
@@ -351,6 +360,8 @@ void playRoundP(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
     cin.get();
 }
 
+
+//Function for when Max wins a round
 void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard)
 {
     int ai2Card, userCard;
@@ -389,9 +400,11 @@ void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
         won = 3;
     }
 
-
     cout << "\nPlace your card (Enter The Number Position of The Card You Want to Place): "<<endl;
     cin >> playerCard;
+
+
+    // Lets the player try again if they put the wrong card index
 
         while (playerCard < 1 || playerCard > static_cast<int>(player.size()))
         {
@@ -419,6 +432,7 @@ void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
     cin.get();
 }
 
+//Function for when Nugget wins a round
 void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard)
 {
     int ai2Card = *max_element(ai2.begin(), ai2.end());
@@ -483,6 +497,7 @@ void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
     cin.get();
 }
 
+//Function for the Last round
 void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard, int& won, vector<int>& deck, double& helpnugget)
 {
     cout << "\nPlace your card (Enter The Number Position of The Card You Want to Place): ";
@@ -529,6 +544,7 @@ void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
     }
     cout<<winner<<" won the Game\n"<< endl << endl;
 
+    // Asking the user if they want to play again
     cout<<"Would you like to play again"<<endl<<endl;
     cout<<"1 for yes, 2 for no"<<endl;
     cin>>playagain;
@@ -543,6 +559,7 @@ void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
             cout<<"Thank you for Playing"<<endl;
             break;
         }
+        //easter egg
         if (playagain == 1001)
         {
             Nugget(helpnugget);
@@ -565,7 +582,7 @@ void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
 
 
 //do not type pass here________________________________________________________________________________________________________________________
-void groundwaterlyrics(){ // grounddwater lyrics function
+void groundwaterlyrics(){ // groundwater easter egg function
     system("cls");
     cout<<endl<<"GARDENER: Hey what happened to my water?"<<endl;
     cout<<"GROUNDHOG 1: There is something here that"<<endl;
@@ -623,8 +640,12 @@ void groundwaterlyrics(){ // grounddwater lyrics function
     PlaySound("ground.WAV", NULL, SND_FILENAME);
 }
 
+// Function for the weather program easter egg
 void weather(double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill)
 {
+    double tempf, windspeed, dew;
+    double cloudb, Windchill;
+
     system("cls");
     // Table defining use of Program
     cout<<" ___________________________________________________"<<endl;
@@ -692,8 +713,10 @@ void weather(double& tempf, double& windspeed, double& dew, double& cloudb, doub
 
 }
 
-void Nugget (double& helpnugget)
+// Function for the Nugget easter egg
+void Nugget ()
 {
+    double helpnugget;
     cout<<"WHAT!?!\nHELP ME!"<<endl;
     cout<<"Press any number to like the video"<<endl;
     cin>>helpnugget;
