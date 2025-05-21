@@ -7,13 +7,11 @@
 #include <windows.h>
 using namespace std;
 
-void Startscreen (double& play, double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
+// Declared functions
+void Startscreen (double& play);
 void notplay ();
-void groundwaterlyrics();
-void weather(double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
-void weathInput (double& tempf, double& windspeed, double& dew);
-void weathcalculate (double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
-void weathDisplay (double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill);
+void delay(int seconds);
+void groundwaterS();
 void Instructions ();
 void Deck(vector<int>& deck);
 void shuffleDeck(vector<int>& deck);
@@ -22,27 +20,30 @@ void displayHand(const string& name, const vector<int>& hand);
 void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2);
 void Nugget(double& helpnugget);
 void playRoundP(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard);
-void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck, double& helpnugget);
+void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck, double& helpnugget, int& playagain);
 void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard);
 void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard);
-void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard, int& won, vector<int>& deck, double& helpnugget);
-// Declared functions
+void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard, int& won, vector<int>& deck, double& helpnugget, int& playagain);
+
+
 
 int main ()
 {
+    // Defining variables
     double play;
-    int cards;
-    double tempf, windspeed, dew, helpnugget;
-    double cloudb, Windchill;
+    int playagain;
+    double helpnugget;
     int won, playerCard, wong;
     vector<int> player, ai1, ai2, deck;
 
 
 
-    Startscreen (play, tempf, windspeed, dew, cloudb, Windchill);
+    // Starting the code
+    Startscreen (play);
+
     if (play == 1) // when user enters 1 it starts the game
     {
-        game(player, ai1, ai2, won, playerCard, wong, deck, helpnugget);
+        game(player, ai1, ai2, won, playerCard, wong, deck, helpnugget, playagain);
     }
 
     if (play == 2) // if user enters 2 it will direct them to the notplay function and end the program
@@ -54,10 +55,12 @@ int main ()
     return 0;
 }
 
-void Startscreen (double& play, double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill)
 
-{ // function for start screen
 
+void Startscreen (double& play)
+
+// function for start screen
+{
 cout<<"                                                WELCOME TO                                                           "<< endl;
 cout<<"         GGGGGGGGGGG  UUUUUUUU     UUUUUUUU  RRRRRRRRRRRRRRRR    KKKKKKKKK    KKKKKKK              AAA               "<< endl;
 cout<<"     GGG::::::::::::G U::::::U     U::::::U R::::::::::::::::R   K:::::::K    K:::::K             A:::A              "<< endl;
@@ -81,26 +84,18 @@ cout<<"1 for yes, 2 for no, 3 for instructions\n"<<endl;
 cin>>play;
 
 
-
 while (true)
 {
-    if (play == 2006) //directs you to groundwater lyrics
+    if (play == 2006) //directs you to groundwater easter egg
     {
-        groundwaterlyrics();
+        groundwaterS();
         cout<<endl;
         cout<<"Would you like to play?"<<endl;
         cout<<"1 for yes, 2 for no, 3 for instructions\n"<<endl;
         cin>>play;
     }
 
-    if (play == 6) //directs you to waether program
-    {
-        weather(tempf, windspeed, dew, cloudb, Windchill);
-        cout<<endl<<endl;
-        cout<<"Would you like to play?"<<endl;
-        cout<<"1 for yes, 2 for no, 3 for instructions\n"<<endl;
-        cin>>play;
-    }
+
 
     if (play == 3) //directs you to Instructions function
     {
@@ -111,10 +106,12 @@ while (true)
         cin>>play;
     }
 
+
     if (play == 1) // breaks and countinues in int main
     {
         break;
     }
+
 
 
     if (play == 2) //breaks and countinues in int main
@@ -135,14 +132,36 @@ while (true)
 
 void notplay () //function for when user inputs 2
 {
-    cout<<"\n\nThank you for NOT playing Gurka!"<<endl;
+    system("cls");
+
+
+
+cout<<"                                         Thank you for NOT playing                                                   "<< endl;
+delay(2);
+cout<<"         GGGGGGGGGGG  UUUUUUUU     UUUUUUUU  RRRRRRRRRRRRRRRR    KKKKKKKKK    KKKKKKK              AAA               "<< endl;
+cout<<"     GGG::::::::::::G U::::::U     U::::::U R::::::::::::::::R   K:::::::K    K:::::K             A:::A              "<< endl;
+cout<<"   GG:::::::::::::::G U::::::U     U::::::U R::::::RRRRRR:::::R  K:::::::K    K:::::K            A:::::A             "<< endl;
+cout<<"  G:::::GGGGGGGG::::G UU:::::U     U:::::UU RR:::::R     R:::::R K:::::::K   K::::::K           A:::::::A            "<< endl;
+cout<<"  G:::::G       GGGGGG U:::::U     U:::::U   R::::R     R:::::R  KK::::::K  K:::::KKK          A:::::::::A           "<< endl;
+cout<<" G:::::G               U:::::D     D:::::U   R::::R     R:::::R   K:::::K K:::::K             A:::::A:::::A          "<< endl;
+cout<<" G:::::G               U:::::D     D:::::U   R::::RRRRRR:::::R    K::::::K:::::K             A:::::A A:::::A         "<< endl;
+cout<<" G:::::G    GGGGGGGGGG U:::::D     D:::::U   R:::::::::::::RR     K:::::::::::K             A:::::A   A:::::A        "<< endl;
+cout<<" G:::::G    G::::::::G U:::::D     D:::::U   R::::RRRRRR:::::R    K:::::::::::K            A:::::A     A:::::A       "<< endl;
+cout<<" G:::::G    GGGGG::::G U:::::D     D:::::U   R::::R     R:::::R   K::::::K:::::K          A:::::AAAAAAAAA:::::A      "<< endl;
+cout<<" G:::::G        G::::G U:::::D     D:::::U   R::::R     R:::::R   K:::::K K:::::K        A:::::::::::::::::::::A     "<< endl;
+cout<<"  G:::::G       G::::G U::::::U   U::::::U   R::::R     R:::::R KK::::::K  K:::::KKK    A:::::AAAAAAAAAAAAA:::::A    "<< endl;
+cout<<"   G:::::GGGGGGGG::::G U:::::::UUU:::::::U RR:::::R     R:::::R K:::::::K   K::::::K   A:::::A             A:::::A   "<< endl;
+cout<<"    GG:::::::::::::::G  UU:::::::::::::UU  R::::::R     R:::::R K:::::::K    K:::::K  A:::::A               A:::::A  "<< endl;
+cout<<"      GGG::::::GGG:::G    UU:::::::::UU    R::::::R     R:::::R K:::::::K    K:::::K A:::::A                 A:::::A "<< endl;
+cout<<"         GGGGGG   GGGG      UUUUUUUUU      RRRRRRRR     RRRRRRR KKKKKKKKK    KKKKKKKAAAAAAA                   AAAAAAA"<< endl<<endl;
     cout<<"Goodbye!"<<endl;
     cout<<"Press enter to exit."<<endl;
 }
 
 void Instructions () // function for when the user inputs 3
 {
-    cout<<"This game gives each player 7 random cards. The first person chosen will be able to place down the first card." << endl;
+    system("cls");
+    cout<<"\n\n\nThis game gives each player 7 random cards. The first person chosen will be able to place down the first card." << endl;
     cout<<"After the first player places their card, the next player must place a card higher or of similar value, "<<endl;
     cout<<"the other players must do the same with the value the player before them placed."<<endl;
     cout<<"If a player is unable to match or place a card of high value, he/she must place the lowest card they have."<<endl;
@@ -151,7 +170,7 @@ void Instructions () // function for when the user inputs 3
     cout<<"Ace's have highest value of 14 despite having a value of 1\n\n"<<endl;
 }
 
-void Deck(vector<int>& deck)
+void Deck(vector<int>& deck) // function for creating the deck
 {
 
     for (int i = 2; i <= 14; ++i)
@@ -164,7 +183,9 @@ void Deck(vector<int>& deck)
     return;
 }
 
-void shuffleDeck(vector<int>& deck)
+
+
+void shuffleDeck(vector<int>& deck) // function for shuffling the deck
 {
     srand(time(0));
     for (int i = deck.size() - 1; i > 0; --i)
@@ -174,16 +195,21 @@ void shuffleDeck(vector<int>& deck)
     }
 }
 
-void dealCards(const vector<int>& deck, vector<int>& player, vector<int>& ai1, vector<int>& ai2) {
-    for (int i = 0; i < 7; ++i)
+
+
+void dealCards(const vector<int>& deck, vector<int>& player, vector<int>& ai1, vector<int>& ai2) // function for dealing the cards
+{
+    for (int i = 0; i < 6; ++i)
     {
         player.push_back(deck[i]);
-        ai1.push_back(deck[i + 7]);
-        ai2.push_back(deck[i + 14]);
+        ai1.push_back(deck[i + 6]);
+        ai2.push_back(deck[i + 12]);
     }
 }
 
-void displayHand(const string& name, const vector<int>& hand)
+
+
+void displayHand(const string& name, const vector<int>& hand) //Displays the Cards to the Player
 {
     cout << name << "'s hand: ";
     for (size_t i = 0; i < hand.size(); ++i)
@@ -192,30 +218,49 @@ void displayHand(const string& name, const vector<int>& hand)
     }
     cout << endl;
 }
-void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2)
+
+
+
+void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2) // Displays the cards to the Player
 {
     displayHand("User", player);
 }
 
 
-void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck, double& helpnugget)
+
+void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck, double& helpnugget, int& playagain) //This is the actual game
+
 {
     system("cls");
-    cout<<"Game Has Started..\n\n" << endl;
+    cout<<"Loading..."<<endl;
+    srand(time(0));
+    delay(rand() % 6);
+    system("cls");
+
+    cout<<"Done Loading, Enjoy!"<<endl;
+    delay(1.99);
+    system("cls");
+    cout<<"Game Has Started...\n\n" <<endl;
+
+
     Deck(deck);
     shuffleDeck(deck);
     dealCards(deck, player, ai1, ai2);
     displayCards(player, ai1, ai2);
-    playRoundP(player, ai1, ai2, won, playerCard);
 
+    // Loop for the rounds
     while (true)
     {
+        playRoundP(player, ai1, ai2, won, playerCard);
+
         if (won == 1)
         {
             cout<<endl;
             displayCards(player, ai1, ai2);
             cout<<endl<<endl;
             playRoundP(player, ai1, ai2, won, playerCard);
+
+            // Break for last round
             if (player.size() == 1)
             {
                 break;
@@ -228,6 +273,8 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
             displayCards(player, ai1, ai2);
             cout<<endl<<endl;
             playRoundM(player, ai1, ai2, won, playerCard);
+
+            // Break for last round
             if (player.size() == 1)
             {
                 break;
@@ -240,6 +287,8 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
             displayCards(player, ai1, ai2);
             cout<<endl<<endl;
             playRoundN(player, ai1, ai2, won, playerCard);
+
+            // Break for last round
             if (player.size() == 1)
             {
                 break;
@@ -247,14 +296,18 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
         }
     }
 
+    //Last round
     displayCards(player, ai1, ai2);
-    playRoundL(player, ai1, ai2, won, playerCard, won, deck, helpnugget);
+    playRoundL(player, ai1, ai2, won, playerCard, won, deck, helpnugget, playagain);
 
 }
 
+
+// Function for first round and if the user won a round
 void playRoundP(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard)
 {
-    cout << "\nPlace your card (Enter the index of the card in your hand): ";
+
+    cout << "\nPlace your card (Enter The Number Position of The Card You Want to Place): ";
     cin >> playerCard;
 
     while (playerCard < 1 || playerCard > static_cast<int>(player.size()))
@@ -323,25 +376,29 @@ void playRoundP(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
         won = 3;
     }
 
-    cout << "User placed: " << userCard << endl<< endl;
-    cout << "Max placed: " << ai1Card << endl<< endl;
-    cout << "Nugget placed: " << ai2Card << endl<< endl;
 
-    cout <<winner<<" won the round"<< endl;
+    cout << "\nUser placed: " << userCard << endl<< endl;
+    cout << "\nMax placed: " << ai1Card << endl<< endl;
+    cout << "\nNugget placed: "<< ai2Card << endl<< endl;
+
+    cout <<winner<<" won the round\n"<< endl;
 
     cout <<"Press enter to continue to the next round"<< endl<< endl;
     cin.ignore();
     cin.get();
+    system("cls");
 }
 
+
+//Function for when Max wins a round
 void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard)
 {
-    int ai2Card, userCard;
 
+    int ai2Card, userCard;
     int ai1Card = *max_element(ai1.begin(), ai1.end());
     ai1.erase(find(ai1.begin(), ai1.end(), ai1Card));
 
-    cout << "Max placed: " << ai1Card << endl<< endl;
+    cout << "\nMax placed: " << ai1Card << endl<< endl;
     int maxCard = ai1Card;
 
     string winner = "Max";
@@ -363,7 +420,7 @@ void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
         break;
         }
     }
-    cout << "Nugget placed: " << ai2Card << endl<< endl;
+    cout << "\nNugget placed: " << ai2Card << endl<< endl;
 
     if (ai2Card >= maxCard)
     {
@@ -372,9 +429,11 @@ void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
         won = 3;
     }
 
-
-    cout << "\nPlace your card (Enter the index of the card in your hand): "<<endl;
+    cout << "\nPlace your card (Enter The Number Position of The Card You Want to Place): "<<endl;
     cin >> playerCard;
+
+
+    // Lets the player try again if they put the wrong card index
 
         while (playerCard < 1 || playerCard > static_cast<int>(player.size()))
         {
@@ -382,13 +441,14 @@ void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
             cin.ignore(10000, '\n');
             cout << "Invalid choice. Choose a valid card index (1 to " << player.size() << "): ";
             cin >> playerCard;
+
         }
 
         userCard = player[playerCard - 1];
         player.erase(player.begin() + playerCard - 1);
 
 
-    cout << "User placed: " << userCard << endl<< endl;
+    cout << "\nUser placed: " << userCard << endl<< endl;
 
     if (userCard >= maxCard)
     {
@@ -396,25 +456,29 @@ void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
         winner = "User";
         won = 1;
     }
-    cout<<winner<<" won the round"<<endl;
+    cout<<winner<<" won the round\n"<<endl;
     cout <<"Press enter to continue to the next round"<< endl<< endl;
     cin.ignore();
     cin.get();
+    system("cls");
 }
 
+//Function for when Nugget wins a round
 void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard)
 {
+
     int ai2Card = *max_element(ai2.begin(), ai2.end());
     ai2.erase(find(ai2.begin(), ai2.end(), ai2Card));
-    cout << "Nugget placed: " << ai2Card << endl<< endl;
+    cout << "\nNugget placed: " << ai2Card << endl<< endl;
     int maxCard = ai2Card;
     int userCard, ai1Card;
     string winner = "Nugget";
     won = 3;
 
-    cout << "\nPlace your card (Enter the index of the card in your hand): "<<endl;
+    cout << "\nPlace your card (Enter The Number Position of The Card You Want to Place): "<<endl;
 
         cin >> playerCard;
+
 
         while (playerCard < 1 || playerCard > static_cast<int>(player.size()))
         {
@@ -423,6 +487,7 @@ void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
             cout << "Invalid choice. Choose a valid card index (1 to " << player.size() << "): ";
             cin >> playerCard;
         }
+
 
         userCard = player[playerCard - 1];
         player.erase(player.begin() + playerCard - 1);
@@ -433,6 +498,7 @@ void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
         winner = "User";
         won = 1;
     }
+
 
     while (true)
     {
@@ -451,8 +517,9 @@ void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
             break;
         }
     }
-    cout << "User placed: " << userCard << endl<< endl;
-    cout << "Max placed: " << ai1Card << endl<< endl;
+
+    cout << "\nUser placed: " << userCard << endl<< endl;
+    cout << "\nMax placed: " << ai1Card << endl<< endl;
 
     if (ai1Card >= maxCard)
     {
@@ -460,17 +527,20 @@ void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
         winner = "Max";
         won = 2;
     }
-    cout<<winner<<" won the round"<<endl;
+
+    cout<<winner<<" won the round\n"<<endl;
     cout <<"Press enter to continue to the next round"<< endl<< endl;
     cin.ignore();
     cin.get();
+     system("cls");
 }
 
-void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard, int& won, vector<int>& deck, double& helpnugget)
+//Function for the Last round
+void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard, int& won, vector<int>& deck, double& helpnugget, int& playagain)
 {
-    cout << "\nPlace your card (Enter the index of the card in your hand): ";
+    cout << "\nPlace your card (Enter The Number Position of The Card You Want to Place): ";
     cin >> playerCard;
-    int playagain;
+
 
     while (playerCard < 1 || playerCard > static_cast<int>(player.size()))
     {
@@ -479,6 +549,8 @@ void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
         cout << "Invalid choice. Choose a valid card index (1 to " << player.size() << "): ";
         cin >> playerCard;
     }
+
+
 
     int userCard = player[playerCard - 1];
     player.erase(player.begin() + playerCard - 1);
@@ -489,9 +561,9 @@ void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
     int ai2Card = *max_element(ai2.begin(), ai2.end());
     ai2.erase(find(ai2.begin(), ai2.end(), ai2Card));
 
-    cout << "User placed: " << userCard << endl<< endl;
-    cout << "Max placed: " << ai1Card << endl<< endl;
-    cout << "Nugget placed: " << ai2Card << endl<< endl;
+    cout << "\nUser placed: " << userCard << endl<< endl;
+    cout << "\nMax placed: " << ai1Card << endl<< endl;
+    cout << "\nNugget placed: " << ai2Card << endl<< endl;
 
     int lowCard = userCard;
     string winner = "User";
@@ -510,8 +582,12 @@ void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
         winner = "Nugget";
         wong = 3;
     }
-    cout<<winner<<" won the Game"<< endl << endl;
 
+
+    cout<<"\n\n"<<
+    winner<<" won the Game\n"<< endl << endl;
+
+    // Asking the user if they want to play again
     cout<<"Would you like to play again"<<endl<<endl;
     cout<<"1 for yes, 2 for no"<<endl;
     cin>>playagain;
@@ -519,13 +595,15 @@ void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
     {
         if (playagain == 1)
         {
-            game(player, ai1, ai2, won, playerCard, wong, deck, helpnugget);
+            game(player, ai1, ai2, won, playerCard, wong, deck, helpnugget, playagain);
         }
         if (playagain == 2)
         {
-            cout<<"Thank you for Playing"<<endl;
+            cout<<"\n\nThank you for Playing\n"<<endl;
+            cout<<"Press enter to exit."<<endl;
             break;
         }
+        //easter egg
         if (playagain == 1001)
         {
             Nugget(helpnugget);
@@ -541,157 +619,26 @@ void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
         }
     }
 }
-
+void delay(int seconds)
+{
+    clock_t start_time = clock();
+    while (clock() < start_time + seconds * CLOCKS_PER_SEC)
+    {
+    }
+}
 
 
 
 
 
 //do not type pass here________________________________________________________________________________________________________________________
-void groundwaterlyrics(){ // grounddwater lyrics function
-    cout<<endl<<"GARDENER: Hey what happened to my water?"<<endl;
-    cout<<"GROUNDHOG 1: There is something here that"<<endl;
-    cout<<"you should knoooooww."<<endl;
-    cout<<"GROUNDHOG 2: The story of water from down belooooww."<<endl;
-    cout<<"GROUNDWATER: Ooh I'm groundwater, I'm all"<<endl;
-    cout<<"around, most of your water is under ground"<<endl;
-    cout<<"the water we have is all the2 same"<<endl;
-    cout<<"I'm used over and over again"<<endl;
-    cout<<"[music]"<<endl;
-    cout<<"I surrounded the castle with a watery moat"<<endl;
-    cout<<"and I flowed along under Huck Finn's boat"<<endl;
-    cout<<"I once dripped down as dinosaur drool and"<<endl;
-    cout<<"now I'm the cool, that fills your swimming pool."<<endl;
-    cout<<"GROUNDHOGS: Feel the drops of snow and rain"<<endl;
-    cout<<"an age old cycle again and again"<<endl;
-    cout<<"groundwater under the ground - "<<endl;
-    cout<<"groundwater flowing down"<<endl;
-    cout<<"in the ground - groundwater"<<endl;
-    cout<<"all around - Groundwater"<<endl;
-    cout<<"Don't you know why we should care - the water we use is every where"<<endl;
-    cout<<"GROUNDWATER: Riding along the aquifers, deep down under, where no one stirs"<<endl;
-    cout<<"I feed the lakes, streams and lands"<<endl;
-    cout<<"I'm pulled by wells, I'm in demand"<<endl;
-    cout<<"[Tug boat horn, Slurp sounds]"<<endl;
-    cout<<"Flowing along like great buried treasure, slipping through space to small to measure"<<endl;
-    cout<<"I may start with an oily sheen, but the dirt and rocks help keep me clean"<<endl;
-    cout<<"GROUNDHOGS: Swallow and swim. shave and spray."<<endl;
-    cout<<"We all use water everyday"<<endl;
-    cout<<"Some for fishes. Some for dishes. But is there enough for everyone's wishes?"<<endl;
-    cout<<"Use it - groundwater Don't abuse it - groundwater"<<endl;
-    cout<<"We use our groundwater everyday. Let's make sure it's here to stay."<<endl;
-    cout<<"GROUNDWATER: Oh rainy days, I must lament the troubles I have with tar and cement."<<endl;
-    cout<<"I can't fill the ground if I can't get through."<<endl;
-    cout<<"I'm groundwater, my power is vast, but waste and pollution keep me from my task."<<endl;
-    cout<<"If we are not careful CLEAN water won't last."<<endl;
-    cout<<"GROUNDHOGS: Without some help, we can't carry on."<<endl;
-    cout<<"What will we do if the water is goooooonne?"<<endl;
-    cout<<"Every time you brush your teeth remember the water underneath."<<endl;
-    cout<<"Next time wait. stop. and think"<<endl;
-    cout<<"before you dump stuff down the sink"<<endl;
-    cout<<"Do you part for water power - learn to take"<<endl;
-    cout<<"a shorter shower"<<endl;
-    cout<<"Stuff that makes your grass look swell - will"<<endl;
-    cout<<"later end up in your well"<<endl;
-    cout<<"Protect - Groundwater"<<endl;
-    cout<<"Conserve - Groundwater"<<endl;
-    cout<<"As you plan to build and grow - leave open"<<endl;
-    cout<<"space for water to flow"<<endl;
-    cout<<"Be aware! - groundwater"<<endl;
-    cout<<"Show you care! - groundwater"<<endl;
-    cout<<"Now you are in the know. Don't forget the water down below"<<endl;
-    cout<<"Don't forget the water down below"<<endl;
-    cout<<"EVERYONE: Don't forget the water down beloooowwww"<<endl<<endl;
+void groundwaterS(){ // groundwater easter egg function
+    system("cls");
     PlaySound("ground.WAV", NULL, SND_FILENAME);
 }
 
-void weather(double& tempf, double& windspeed, double& dew, double& cloudb, double& Windchill)
-{
-    // Table defining use of Program
-    cout<<" ___________________________________________________"<<endl;
-    cout<<"|                                                   |"<<endl;
-    cout<<"| This program calculates Cloud base and wind chill |"<<endl;
-    cout<<"| Please enter temperature in Fahrenheit the dew    |"<<endl;
-    cout<<"| point in Fahrenheit, and wind speed to start      |"<<endl;
-    cout<<"|___________________________________________________|"<<endl;
 
-
-    // Bringing back the values from the main function
-    weathInput(tempf, dew, windspeed);
-
-    weathcalculate(tempf, windspeed, dew, cloudb, Windchill);
-
-    weathDisplay(tempf, windspeed, dew, cloudb, Windchill);
-}
-
-void weathInput(double& tempf, double& dew, double& windspeed)
-    {
-
-        // Asking for Temperature
-        cout<<endl<<"Temperature in Fahrenheit: ";
-        cin>>tempf;
-
-
-        while(cin.fail())
-                {
-                cout<<"Please enter an number not a character"<<endl;
-                cin.clear();
-                cin.ignore(10000, '\n');
-                cin>>tempf;
-                }
-
-
-        // Asking for The Dew point
-        cout<<endl<<"Dew point in Fahrenheit: ";
-        cin>>dew;
-
-
-        while(cin.fail())
-            {
-            cout<<"Please enter an number not a character"<<endl;
-            cin.clear();
-            cin.ignore(10000, '\n');
-            cin>>dew;
-            }
-
-
-        // Asking for Wind speed
-        cout<<endl<<"Wind speed in mph: ";
-        cin>>windspeed;
-
-
-        while(cin.fail())
-            {
-            cout<<"Please enter an number not a character"<<endl;
-            cin.clear();
-            cin.ignore(10000, '\n');
-            cin>>windspeed;
-            }
-        cout<<endl<<endl;
-}
-
-    void weathcalculate(double& tempf, double& windspeed, double& dew, double& cloudb,  double& Windchill)
-{
-        cloudb = ((tempf - dew) / 4.4) * 1000;
-        Windchill = 35.74 + ((0.6215 * tempf) - (35.75 * (pow(windspeed, 0.16)))) + (0.4275 * tempf * (pow(windspeed, 0.16)));
-
-}
-
-    //Displaying output
-    void weathDisplay(double& tempf, double& windspeed, double& dew, double& cloudb,  double& Windchill)
-{
-        cout<<" Temperature |  "<<tempf<<" F"<<endl;
-        cout<<"-------------|-------------"<<endl;
-        cout<<"  Dew Point  |  "<<dew<<" F"<<endl;
-        cout<<"-------------|-------------"<<endl;
-        cout<<" Wind speed  |  "<<windspeed<<" mph"<<endl;
-        cout<<"-------------|-------------"<<endl;
-        cout<<" Wind Chill  |  "<<Windchill<<" F"<<endl;
-        cout<<"-------------|-------------"<<endl;
-        cout<<" Cloud Base  |  "<<cloudb<<" ft"<<endl;
-
-}
-
+// Function for the Nugget easter egg
 void Nugget (double& helpnugget)
 {
     cout<<"WHAT!?!\nHELP ME!"<<endl;
@@ -713,4 +660,3 @@ void Nugget (double& helpnugget)
     }
 
 }
-
