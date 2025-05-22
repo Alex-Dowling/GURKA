@@ -250,11 +250,10 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
     Deck(deck);
     shuffleDeck(deck);
     dealCards(deck, player, ai1, ai2);
-
+    playRoundP(player, ai1, ai2, won, playerCard);
     // Loop for the rounds
     while (true)
     {
-        playRoundP(player, ai1, ai2, won, playerCard);
 
         if (won == 1)
         {
