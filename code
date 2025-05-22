@@ -20,7 +20,7 @@ void displayHand(const string& name, const vector<int>& hand);
 void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2);
 void Nugget(double& helpnugget);
 void playRoundP(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard);
-void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck, double& helpnugget, int& playagain);
+void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck, double& helpnugget, int& playagain, int& uwon, int& mwon, int& nwon);
 void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard);
 void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard);
 void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard, int& won, vector<int>& deck, double& helpnugget, int& playagain);
@@ -35,6 +35,7 @@ int main ()
     double helpnugget;
     int won, playerCard, wong;
     vector<int> player, ai1, ai2, deck;
+    int mwon, uwon, nwon;
 
 
 
@@ -46,7 +47,7 @@ int main ()
         playagain = 1;
         while (playagain == 1)
         {
-            game(player, ai1, ai2, won, playerCard, wong, deck, helpnugget, playagain);
+            game(player, ai1, ai2, won, playerCard, wong, deck, helpnugget, playagain, uwon, mwon, nwon);
         }
     }
 
@@ -232,8 +233,7 @@ void displayCards(const vector<int>& player, const vector<int>& ai1, const vecto
 
 
 
-void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck, double& helpnugget, int& playagain) //This is the actual game
-
+void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck, double& helpnugget, int& playagain, int& uwon, int& mwon, int& nwon) //This is the actual game
 {
     system("cls");
     cout<<"Loading..."<<endl;
