@@ -19,11 +19,13 @@ void dealCards(const vector<int>& deck, vector<int>& player, vector<int>& ai1, v
 void displayHand(const string& name, const vector<int>& hand);
 void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2);
 void Nugget(double& helpnugget);
-void playRoundP(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard);
-void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck, double& helpnugget, int& playagain);
-void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard);
-void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard);
-void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard, int& won, vector<int>& deck, double& helpnugget, int& playagain);
+void playRoundP(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon);
+void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck, double& helpnugget, int& playagain, int& uwon, int& mwon, int& nwon);
+void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon);
+void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon);
+void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard, int& won, vector<int>& deck, double& helpnugget, int& playagain, int& uwon, int& mwon, int& nwon);
+void playRoundP2(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon);
+void playRoundP3(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon);
 
 
 
@@ -35,6 +37,7 @@ int main ()
     double helpnugget;
     int won, playerCard, wong;
     vector<int> player, ai1, ai2, deck;
+    int mwon = 0, uwon = 0, nwon = 0;
 
 
 
@@ -43,7 +46,11 @@ int main ()
 
     if (play == 1) // when user enters 1 it starts the game
     {
-        game(player, ai1, ai2, won, playerCard, wong, deck, helpnugget, playagain);
+        playagain = 1;
+        while (playagain == 1)
+        {
+            game(player, ai1, ai2, won, playerCard, wong, deck, helpnugget, playagain, uwon, mwon, nwon);
+        }
     }
 
     if (play == 2) // if user enters 2 it will direct them to the notplay function and end the program
@@ -228,8 +235,7 @@ void displayCards(const vector<int>& player, const vector<int>& ai1, const vecto
 
 
 
-void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck, double& helpnugget, int& playagain) //This is the actual game
-
+void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck, double& helpnugget, int& playagain, int& uwon, int& mwon, int& nwon) //This is the actual game
 {
     system("cls");
     cout<<"Loading..."<<endl;
@@ -238,7 +244,7 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
     system("cls");
 
     cout<<"Done Loading, Enjoy!"<<endl;
-    delay(1.99);
+    delay(1.75);
     system("cls");
     cout<<"Game Has Started...\n\n" <<endl;
 
@@ -246,67 +252,77 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
     Deck(deck);
     shuffleDeck(deck);
     dealCards(deck, player, ai1, ai2);
-    displayCards(player, ai1, ai2);
-
+    playRoundP(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
     // Loop for the rounds
     while (true)
     {
-        playRoundP(player, ai1, ai2, won, playerCard);
 
         if (won == 1)
         {
-            cout<<endl;
-            displayCards(player, ai1, ai2);
-            cout<<endl<<endl;
-            playRoundP(player, ai1, ai2, won, playerCard);
-
-            // Break for last round
-            if (player.size() == 1)
+            system("cls");
+            if (static_cast<int>(player.size()) == 1)
             {
                 break;
             }
+            if (mwon >= 30)
+            {
+                playRoundP2(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
+            }
+            if (nwon >= 30)
+            {
+                playRoundP3(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
+            }
+            else
+            {
+                playRoundP(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
+            }
+            system("cls");
+
+            // Break for last round
+
         }
 
         if (won == 2)
         {
-            cout<<endl;
-            displayCards(player, ai1, ai2);
-            cout<<endl<<endl;
-            playRoundM(player, ai1, ai2, won, playerCard);
 
-            // Break for last round
-            if (player.size() == 1)
+            system("cls");
+            if (static_cast<int>(player.size()) == 1)
             {
                 break;
             }
+            playRoundM(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
+            system("cls");
+            // Break for last round
+
         }
 
         if (won == 3)
         {
-            cout<<endl;
-            displayCards(player, ai1, ai2);
-            cout<<endl<<endl;
-            playRoundN(player, ai1, ai2, won, playerCard);
-
-            // Break for last round
-            if (player.size() == 1)
+            system("cls");
+            if (static_cast<int>(player.size()) == 1)
             {
                 break;
             }
+            cout<<endl<<endl;
+            playRoundN(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
+            system("cls");
+            // Break for last round
+
         }
     }
 
     //Last round
-    displayCards(player, ai1, ai2);
-    playRoundL(player, ai1, ai2, won, playerCard, won, deck, helpnugget, playagain);
+    playRoundL(player, ai1, ai2, won, playerCard, won, deck, helpnugget, playagain, uwon, mwon, nwon);
 
 }
 
 
 // Function for first round and if the user won a round
-void playRoundP(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard)
+void playRoundP(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon)
 {
 
+    displayCards(player, ai1, ai2);
+    cout<<endl<<endl;
     cout << "\nPlace your card (Enter The Number Position of The Card You Want to Place): ";
     cin >> playerCard;
 
@@ -383,17 +399,23 @@ void playRoundP(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
 
     cout <<winner<<" won the round\n"<< endl;
 
+    uwon = uwon + userCard;
+    mwon = mwon + ai1Card;
+    nwon = nwon + ai2Card;
+    cout<<uwon<<" "<<mwon<<" "<<nwon<<endl;
+
     cout <<"Press enter to continue to the next round"<< endl<< endl;
     cin.ignore();
     cin.get();
-    system("cls");
 }
 
 
 //Function for when Max wins a round
-void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard)
+void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon)
 {
 
+    displayCards(player, ai1, ai2);
+    cout<<endl<<endl;
     int ai2Card, userCard;
     int ai1Card = *max_element(ai1.begin(), ai1.end());
     ai1.erase(find(ai1.begin(), ai1.end(), ai1Card));
@@ -457,16 +479,21 @@ void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
         won = 1;
     }
     cout<<winner<<" won the round\n"<<endl;
+    uwon = uwon + userCard;
+    mwon = mwon + ai1Card;
+    nwon = nwon + ai2Card;
+    cout<<uwon<<" "<<mwon<<" "<<nwon<<endl;
     cout <<"Press enter to continue to the next round"<< endl<< endl;
     cin.ignore();
     cin.get();
-    system("cls");
 }
 
 //Function for when Nugget wins a round
-void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard)
+void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon)
 {
 
+    displayCards(player, ai1, ai2);
+    cout<<endl<<endl;
     int ai2Card = *max_element(ai2.begin(), ai2.end());
     ai2.erase(find(ai2.begin(), ai2.end(), ai2Card));
     cout << "\nNugget placed: " << ai2Card << endl<< endl;
@@ -529,14 +556,17 @@ void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
     }
 
     cout<<winner<<" won the round\n"<<endl;
+    uwon = uwon + userCard;
+    mwon = mwon + ai1Card;
+    nwon = nwon + ai2Card;
+    cout<<uwon<<" "<<mwon<<" "<<nwon<<endl;
     cout <<"Press enter to continue to the next round"<< endl<< endl;
     cin.ignore();
     cin.get();
-     system("cls");
 }
 
 //Function for the Last round
-void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard, int& won, vector<int>& deck, double& helpnugget, int& playagain)
+void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard, int& won, vector<int>& deck, double& helpnugget, int& playagain, int& uwon, int& mwon, int& nwon)
 {
     cout << "\nPlace your card (Enter The Number Position of The Card You Want to Place): ";
     cin >> playerCard;
@@ -595,7 +625,7 @@ void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
     {
         if (playagain == 1)
         {
-            game(player, ai1, ai2, won, playerCard, wong, deck, helpnugget, playagain);
+            break;
         }
         if (playagain == 2)
         {
@@ -625,6 +655,132 @@ void delay(int seconds)
     while (clock() < start_time + seconds * CLOCKS_PER_SEC)
     {
     }
+}
+
+void playRoundP2(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon)
+{
+
+    displayCards(player, ai1, ai2);
+    cout<<endl<<endl;
+    cout << "\nPlace your card (Enter The Number Position of The Card You Want to Place): ";
+    cin >> playerCard;
+
+    while (playerCard < 1 || playerCard > static_cast<int>(player.size()))
+    {
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cout << "Invalid choice. Choose a valid card index (1 to " << player.size() << "): ";
+        cin >> playerCard;
+    }
+
+    int userCard = player[playerCard - 1];
+    player.erase(player.begin() + playerCard - 1);
+    int maxCard = userCard;
+    int ai2Card;
+    string winner = "User";
+    won = 1;
+
+    while (true)
+    {
+        if (*max_element(ai2.begin(), ai2.end()) >= maxCard)
+        {
+        ai2Card = *max_element(ai2.begin(), ai2.end());
+        ai2.erase(find(ai2.begin(), ai2.end(), ai2Card));
+        break;
+        }
+
+        if (*max_element(ai2.begin(), ai2.end()) << maxCard)
+        {
+        ai2Card = *min_element(ai2.begin(), ai2.end());
+        ai2.erase(find(ai2.begin(), ai2.end(), ai2Card));
+        break;
+        }
+    }
+
+
+    if (ai2Card >= maxCard)
+    {
+        maxCard = ai2Card;
+        winner = "Nugget";
+        won = 3;
+    }
+
+
+    cout << "\nUser placed: " << userCard << endl<< endl;
+    cout << "\nNugget placed: "<< ai2Card << endl<< endl;
+
+    cout <<winner<<" won the round\n"<< endl;
+
+    uwon = uwon + userCard;
+    nwon = nwon + ai2Card;
+    cout<<uwon<<" "<<nwon<<endl;
+
+    cout <<"Press enter to continue to the next round"<< endl<< endl;
+    cin.ignore();
+    cin.get();
+}
+void playRoundP3(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon)
+{
+
+    displayCards(player, ai1, ai2);
+    cout<<endl<<endl;
+    cout << "\nPlace your card (Enter The Number Position of The Card You Want to Place): ";
+    cin >> playerCard;
+
+    while (playerCard < 1 || playerCard > static_cast<int>(player.size()))
+    {
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cout << "Invalid choice. Choose a valid card index (1 to " << player.size() << "): ";
+        cin >> playerCard;
+    }
+
+    int userCard = player[playerCard - 1];
+    player.erase(player.begin() + playerCard - 1);
+    int maxCard = userCard;
+    int ai1Card, ai2Card;
+    string winner = "User";
+    won = 1;
+
+    while (true)
+    {
+        if (*max_element(ai1.begin(), ai1.end()) >= maxCard)
+        {
+            ai1Card = *max_element(ai1.begin(), ai1.end());
+            ai1.erase(find(ai1.begin(), ai1.end(), ai1Card));
+            break;
+        }
+
+
+    if (*max_element(ai1.begin(), ai1.end()) << maxCard)
+        {
+            ai1Card = *min_element(ai1.begin(), ai1.end());
+            ai1.erase(find(ai1.begin(), ai1.end(), ai1Card));
+            break;
+        }
+    }
+
+
+    if (ai1Card >= maxCard)
+    {
+        maxCard = ai1Card;
+        winner = "Max";
+        won = 2;
+    }
+
+    cout << "\nUser placed: " << userCard << endl<< endl;
+    cout << "\nMax placed: " << ai1Card << endl<< endl;
+
+    cout <<winner<<" won the round\n"<< endl;
+
+    uwon = uwon + userCard;
+    mwon = mwon + ai1Card;
+
+    cout<<uwon<<" "<<mwon<<" "<<endl;
+
+    cout <<"Press enter to continue to the next round"<< endl<< endl;
+    cin.ignore();
+    cin.get();
 }
 
 
