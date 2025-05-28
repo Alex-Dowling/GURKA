@@ -20,7 +20,7 @@ void displayHand(const string& name, const vector<int>& hand);
 void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2);
 void Nugget(double& helpnugget);
 void playRoundP(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon);
-void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck, double& helpnugget, int& playagain, int& uwon, int& mwon, int& nwon, int& gamewon);
+void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& seven, vector<int>& deck, double& helpnugget, int& playagain, int& uwon, int& mwon, int& nwon, int& gamewon);
 void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon);
 void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon);
 void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& playerCard, int& won, vector<int>& deck, int& uwon, int& mwon, int& nwon);
@@ -39,9 +39,9 @@ int main ()
     double play;
     int playagain;
     double helpnugget;
-    int won, playerCard, wong, gamewon;
+    int won, playerCard, gamewon;
     vector<int> player, ai1, ai2, deck;
-    int mwon = 0, uwon = 0, nwon = 0;
+    int mwon = 0, uwon = 0, nwon = 0, seven = 7;
 
     // Starting the code
     Startscreen (play);
@@ -51,7 +51,7 @@ int main ()
         playagain = 1;
         while (playagain == 1)
         {
-            game(player, ai1, ai2, won, playerCard, wong, deck, helpnugget, playagain, uwon, mwon, nwon, gamewon);
+            game(player, ai1, ai2, won, playerCard, seven, deck, helpnugget, playagain, uwon, mwon, nwon, gamewon);
         }
     }
 
@@ -236,7 +236,7 @@ void displayCards(const vector<int>& player, const vector<int>& ai1, const vecto
 
 
 
-void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& wong, vector<int>& deck, double& helpnugget, int& playagain, int& uwon, int& mwon, int& nwon, int& gamewon) //This is the actual game
+void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& seven, vector<int>& deck, double& helpnugget, int& playagain, int& uwon, int& mwon, int& nwon, int& gamewon) //This is the actual game
 {
     system("cls");
     cout<<"Loading..."<<endl;
@@ -252,34 +252,46 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
     shuffleDeck(deck);
     dealCards(deck, player, ai1, ai2);
 
-    if (mwon >= 30)
+    while (true)
     {
+        if (mwon >= 30)
+        {
 
         if (nwon >= 30)
         {
             gamewon = 1;
+            seven = 6;
+            break;
         }
 
         if (uwon >= 30)
         {
             gamewon = 3;
+            seven = 6;
+            break;
         }
-        playRoundP2(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
-    }
+            playRoundP2(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
+            break;
+        }
 
     if (nwon >= 30)
     {
         if (mwon >= 30)
         {
             gamewon = 1;
+            seven = 6;
+            break;
         }
 
         if (uwon >= 30)
         {
             gamewon = 2;
+            seven = 6;
+            break;
         }
 
         playRoundP3(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
+        break;
 
     }
 
@@ -288,22 +300,29 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
         if (mwon >= 30)
         {
             gamewon = 3;
+            seven = 6;
+            break;
         }
 
         if (nwon >= 30)
         {
             gamewon = 2;
+            seven = 6;
+            break;
         }
 
         playRoundM2(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
+        break;
     }
     else
     {
         playRoundP(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
+        break;
+    }
     }
 
     // Loop for the rounds
-    while (true)
+    while (seven == 7)
     {
 
         if (won == 1)
@@ -315,54 +334,17 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
             }
             if (mwon >= 30)
             {
-
-                if (nwon >= 30)
-                {
-                    gamewon = 1;
-                    break;
-                }
-
-                if (uwon >= 30)
-                {
-                    gamewon = 3;
-                    break;
-                }
-
                 playRoundP2(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
 
             }
             if (nwon >= 30)
             {
-                if (mwon >= 30)
-                {
-                    gamewon = 1;
-                    break;
-                }
-
-                if (uwon >= 30)
-                {
-                    gamewon = 2;
-                    break;
-                }
-
                 playRoundP3(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
 
             }
 
             if (uwon >= 30)
             {
-                if (mwon >= 30)
-                {
-                    gamewon = 3;
-                    break;
-                }
-
-                if (nwon >= 30)
-                {
-                    gamewon = 2;
-                    break;
-                }
-
                 playRoundM2(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
 
             }
@@ -386,49 +368,16 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
             }
             if (uwon >= 30)
             {
-                if (mwon >= 30)
-                {
-                    gamewon = 3;
-                    break;
-                }
-
-                if (nwon >= 30)
-                {
-                    gamewon = 2;
-                    break;
-                }
                 playRoundM2(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
             }
 
             if (mwon >= 30)
             {
-                if (uwon >= 30)
-                {
-                    gamewon = 3;
-                    break;
-                }
-
-                if (nwon >= 30)
-                {
-                    gamewon = 1;
-                    break;
-                }
                 playRoundN2(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
             }
 
             if (nwon >= 30)
             {
-                if (uwon >= 30)
-                {
-                    gamewon = 2;
-                    break;
-                }
-
-                if (mwon >= 30)
-                {
-                    gamewon = 1;
-                    break;
-                }
                 playRoundM3(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
             }
 
@@ -451,35 +400,11 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
 
             if (nwon >= 30)
             {
-                if (mwon >= 30)
-                {
-                    gamewon = 1;
-                    break;
-                }
-
-                if (uwon >= 30)
-                {
-                    gamewon = 2;
-                    break;
-                }
-
                 playRoundP3(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
             }
 
             if (mwon >= 30)
             {
-                if (nwon >= 30)
-                {
-                    gamewon = 1;
-                    break;
-                }
-
-                if (uwon >= 30)
-                {
-                    gamewon = 3;
-                    break;
-                }
-
                 playRoundN2(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
             }
 
