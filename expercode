@@ -26,7 +26,7 @@ void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
 void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wong, int& playerCard, int& won, vector<int>& deck, double& helpnugget, int& playagain, int& uwon, int& mwon, int& nwon);
 void playRoundP2(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon);
 void playRoundP3(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon);
-void endscreen(int& gamewon);
+void endscreen(int& gamewon, double& helpnugget, int& playagain);
 void playRoundM2(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon);
 void playRoundM3(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon);
 void playRoundN2(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon);
@@ -272,11 +272,13 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
 
                 if (nwon >= 30)
                 {
+                    gamewon = 1;
                     break;
                 }
 
                 if (uwon >= 30)
                 {
+                    gamewon = 3;
                     break;
                 }
 
@@ -287,11 +289,13 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
             {
                 if (mwon >= 30)
                 {
+                    gamewon = 1;
                     break;
                 }
 
                 if (uwon >= 30)
                 {
+                    gamewon = 2;
                     break;
                 }
 
@@ -303,11 +307,13 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
             {
                 if (mwon >= 30)
                 {
+                    gamewon = 3;
                     break;
                 }
 
                 if (nwon >= 30)
                 {
+                    gamewon = 2;
                     break;
                 }
 
@@ -336,44 +342,50 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
             {
                 if (mwon >= 30)
                 {
+                    gamewon = 3;
                     break;
                 }
 
                 if (nwon >= 30)
                 {
+                    gamewon = 2;
                     break;
                 }
                 playRoundM2(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
             }
-            
+
             if (mwon >= 30)
             {
                 if (uwon >= 30)
                 {
+                    gamewon = 3;
                     break;
                 }
 
                 if (nwon >= 30)
                 {
+                    gamewon = 1;
                     break;
                 }
                 playRoundN2(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
             }
-            
+
             if (nwon >= 30)
             {
                 if (uwon >= 30)
                 {
+                    gamewon = 2;
                     break;
                 }
 
                 if (mwon >= 30)
                 {
+                    gamewon = 1;
                     break;
                 }
                 playRoundM3(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
             }
-            
+
             else
             {
                 playRoundM(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
@@ -395,41 +407,47 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
             {
                 if (mwon >= 30)
                 {
+                    gamewon = 1;
                     break;
                 }
 
                 if (uwon >= 30)
                 {
+                    gamewon = 2;
                     break;
                 }
 
                 playRoundP3(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
             }
-            
+
             if (mwon >= 30)
             {
                 if (nwon >= 30)
                 {
+                    gamewon = 1;
                     break;
                 }
 
                 if (uwon >= 30)
                 {
+                    gamewon = 3;
                     break;
                 }
 
                 playRoundN2(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
             }
-            
+
             if (uwon >= 30)
             {
                 if (nwon >= 30)
                 {
+                    gamewon = 2;
                     break;
                 }
 
                 if (mwon >= 30)
                 {
+                    gamewon = 3;
                     break;
                 }
 
@@ -446,7 +464,7 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
         }
     }
 
-    endscreen(gamewon);
+    endscreen(gamewon, helpnugget, playagain);
 }
 
 
@@ -1114,8 +1132,10 @@ void playRoundN3(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& w
     cin.get();
 }
 
-void endscreen(int& gamewon)
+void endscreen(int& gamewon, double& helpnugget, int& playagain)
 {
+    system("cls");
+
     if (gamewon == 1)
     {
         cout<<"User won the game"<<endl;
@@ -1127,6 +1147,36 @@ void endscreen(int& gamewon)
     if (gamewon == 3)
     {
         cout<<"Nugget won the game"<<endl;
+    }
+
+    cout<<endl<<"Would you like to play again?"<<endl;
+    cin>>playagain;
+    while (true)
+    {
+        if (playagain == 1)
+        {
+            break;
+        }
+        if (playagain == 2)
+        {
+            cout<<"\n\nThank you for Playing\n"<<endl;
+            cout<<"Press enter to exit."<<endl;
+            break;
+        }
+        //easter egg
+        if (playagain == 1001)
+        {
+            Nugget(helpnugget);
+            cout<<endl<<endl;
+            break;
+        }
+        else
+        {
+            cin.clear();
+            cin.ignore();
+            cout<<"Please enter 1 or 2"<<endl;
+            cin>>playagain;
+        }
     }
 }
 
@@ -1158,6 +1208,7 @@ void Nugget (double& helpnugget)
         else
         {
             cout<<endl<<"Gegagedigedagedago"<<endl;
+            PlaySound("victory.WAV", NULL, SND_FILENAME);
             break;
         }
     }
