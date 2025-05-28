@@ -251,7 +251,57 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
     Deck(deck);
     shuffleDeck(deck);
     dealCards(deck, player, ai1, ai2);
-    playRoundP(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
+
+    if (mwon >= 30)
+    {
+
+        if (nwon >= 30)
+        {
+            gamewon = 1;
+        }
+
+        if (uwon >= 30)
+        {
+            gamewon = 3;
+        }
+        playRoundP2(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
+    }
+
+    if (nwon >= 30)
+    {
+        if (mwon >= 30)
+        {
+            gamewon = 1;
+        }
+
+        if (uwon >= 30)
+        {
+            gamewon = 2;
+        }
+
+        playRoundP3(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
+
+    }
+
+    if (uwon >= 30)
+    {
+        if (mwon >= 30)
+        {
+            gamewon = 3;
+        }
+
+        if (nwon >= 30)
+        {
+            gamewon = 2;
+        }
+
+        playRoundM2(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
+    }
+    else
+    {
+        playRoundP(player, ai1, ai2, won, playerCard, uwon, mwon, nwon);
+    }
+
     // Loop for the rounds
     while (true)
     {
@@ -563,7 +613,6 @@ void playRoundP(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
     cout << "\nNugget placed: "<< ai2Card << endl<< endl;
 
     cout <<winner<<" won the round\n"<< endl;
-    cout<<uwon<<" "<<mwon<<" "<<nwon<<endl;
 
     cout <<"Press enter to continue to the next round"<< endl<< endl;
     cin.ignore();
@@ -640,7 +689,6 @@ void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
         won = 1;
     }
     cout<<winner<<" won the round\n"<<endl;
-    cout<<uwon<<" "<<mwon<<" "<<nwon<<endl;
     cout <<"Press enter to continue to the next round"<< endl<< endl;
     cin.ignore();
     cin.get();
@@ -714,7 +762,6 @@ void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
     }
 
     cout<<winner<<" won the round\n"<<endl;
-    cout<<uwon<<" "<<mwon<<" "<<nwon<<endl;
     cout <<"Press enter to continue to the next round"<< endl<< endl;
     cin.ignore();
     cin.get();
@@ -857,7 +904,6 @@ void playRoundP2(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& w
     cout << "\nNugget placed: "<< ai2Card << endl<< endl;
 
     cout <<winner<<" won the round\n"<< endl;
-    cout<<uwon<<" "<<nwon<<endl;
 
     cout <<"Press enter to continue to the next round"<< endl<< endl;
     cin.ignore();
@@ -917,8 +963,6 @@ void playRoundP3(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& w
 
     cout <<winner<<" won the round\n"<< endl;
 
-    cout<<uwon<<" "<<mwon<<" "<<endl;
-
     cout <<"Press enter to continue to the next round"<< endl<< endl;
     cin.ignore();
     cin.get();
@@ -965,7 +1009,6 @@ void playRoundM2(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& w
     }
 
     cout<<winner<<" won the round\n"<<endl;
-    cout<<uwon<<" "<<mwon<<" "<<nwon<<endl;
     cout <<"Press enter to continue to the next round"<< endl<< endl;
     cin.ignore();
     cin.get();
@@ -1015,7 +1058,6 @@ void playRoundM3(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& w
         won = 1;
     }
     cout<<winner<<" won the round\n"<<endl;
-    cout<<uwon<<" "<<mwon<<" "<<nwon<<endl;
     cout <<"Press enter to continue to the next round"<< endl<< endl;
     cin.ignore();
     cin.get();
@@ -1107,7 +1149,6 @@ void playRoundN3(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& w
     }
 
     cout<<winner<<" won the round\n"<<endl;
-    cout<<uwon<<" "<<mwon<<" "<<nwon<<endl;
     cout <<"Press enter to continue to the next round"<< endl<< endl;
     cin.ignore();
     cin.get();
