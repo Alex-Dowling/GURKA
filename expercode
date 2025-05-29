@@ -222,7 +222,23 @@ void displayHand(const string& name, const vector<int>& hand) //Displays the Car
     cout << name << "'s hand: ";
     for (size_t i = 0; i < hand.size(); ++i)
     {
-    cout << hand[i] << " ";
+        if (hand[i] >= 10)
+        {
+            cout << endl << " ____" << endl;
+            cout << "|    |" << endl;
+            cout << "| " << hand[i] << " |" << endl;
+            cout << "|____|";
+        }
+
+
+        else
+        {
+            cout << endl << " ____" << endl;
+            cout << "|    |" << endl;
+            cout << "| " << hand[i] << "  |" << endl;
+            cout << "|____|";
+        }
+
     }
     cout << endl;
 }
