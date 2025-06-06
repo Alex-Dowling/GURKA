@@ -219,13 +219,32 @@ void dealCards(const vector<int>& deck, vector<int>& player, vector<int>& ai1, v
 
 void displayHand(const string& name, const vector<int>& hand) //Displays the Cards to the Player
 {
-    cout << name << "'s hand: ";
-    cout << endl << "  ____ " << "   ____ " << "   ____ " << "   ____ " << "   ____ " << "   ____ " << endl;
-    cout << " |    | " << " |    | " << " |    | " << " |    | " << " |    | " << " |    | " << endl;
-    cout << " | " << hand[1] << "  | " << " | " << hand[2] << "  | " << " | " << hand[3] << "  | " << " | " << hand[4] << "  | " <<" | " << hand[5] << "  | " <<" | " << hand[6] << "  | " <<endl;
-    cout << " |____| " << " |____| " << " |____| " << " |____| " << " |____| " << " |____| ";
 
+   cout << name << "'s hand:" << endl;
+
+    for (size_t i = 0; i < hand.size(); ++i)
+        cout << " ____  ";
     cout << endl;
+
+    for (size_t i = 0; i < hand.size(); ++i)
+        cout << "|    | ";
+    cout << endl;
+
+    for (size_t i = 0; i < hand.size(); ++i)
+    {
+        cout << "| ";
+
+        if (hand[i] < 10)
+            cout << hand[i] << "  | ";
+        else
+            cout << hand[i] << " | ";
+    }
+    cout << endl;
+
+    for (size_t i = 0; i < hand.size(); ++i)
+        cout << "|____| ";
+    cout << endl;
+
 }
 
 void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2) // Displays the cards to the Player
