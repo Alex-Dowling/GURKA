@@ -219,33 +219,63 @@ void dealCards(const vector<int>& deck, vector<int>& player, vector<int>& ai1, v
 
 void displayHand(const string& name, const vector<int>& hand) //Displays the Cards to the Player
 {
-
-   cout << name << "'s hand:" << endl;
-
-    for (size_t i = 0; i < hand.size(); ++i)
-        cout << " ____  ";
-    cout << endl;
+cout << name << "'s hand:" << endl;
 
     for (size_t i = 0; i < hand.size(); ++i)
-        cout << "|    | ";
-    cout << endl;
+        cout << " ___  ";
+        cout << endl;
+
+    for (size_t i = 0; i < hand.size(); ++i)
+        cout << "|   | ";
+        cout << endl;
 
     for (size_t i = 0; i < hand.size(); ++i)
     {
         cout << "| ";
 
+        if (hand[i] == 10)
+        {
+            cout << hand[i] << "| ";
+        }
+
+
+        if (hand[i] == 11)
+        {
+            cout << "J" << " | ";
+        }
+
+
+        if (hand[i] == 12)
+        {
+            cout << "Q" << " | ";
+        }
+
+
+        if (hand[i] == 13)
+        {
+            cout << "K" << " | ";
+        }
+
+
+        if (hand[i] == 14)
+        {
+            cout << "A" << " | ";
+        }
+
+
         if (hand[i] < 10)
-            cout << hand[i] << "  | ";
-        else
+        {
             cout << hand[i] << " | ";
+        }
+
     }
     cout << endl;
 
     for (size_t i = 0; i < hand.size(); ++i)
-        cout << "|____| ";
-    cout << endl;
+        cout << "|___| ";
+        cout << endl;
+    }
 
-}
 
 void displayCards(const vector<int>& player, const vector<int>& ai1, const vector<int>& ai2) // Displays the cards to the Player
 {
@@ -259,7 +289,7 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
     system("cls");
     cout<<"Loading..."<<endl;
     srand(time(0));
-    delay(rand() % 3);
+    delay(rand() % 6);
     system("cls");
 
     cout<<"Done Loading, Enjoy!"<<endl;
@@ -714,6 +744,9 @@ void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& wo
 void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& playerCard, int& won, vector<int>& deck, int& uwon, int& mwon, int& nwon)
 {
     cout << "\nPlace your card (Enter The Number Position of The Card You Want to Place): ";
+    int userCard, ai1Card, ai2Card;
+    if (uwon < 30)
+    {
     cin >> playerCard;
 
 
@@ -727,19 +760,36 @@ void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& pl
 
 
 
-    int userCard = player[playerCard - 1];
+    userCard = player[playerCard - 1];
     player.erase(player.begin() + playerCard - 1);
-
-    int ai1Card = *min_element(ai1.begin(), ai1.end());
-    ai1.erase(find(ai1.begin(), ai1.end(), ai1Card));
-
-    int ai2Card = *min_element(ai2.begin(), ai2.end());
-    ai2.erase(find(ai2.begin(), ai2.end(), ai2Card));
-
     cout << "\nUser placed: " << userCard << endl<< endl;
-    cout << "\nMax placed: " << ai1Card << endl<< endl;
-    cout << "\nNugget placed: " << ai2Card << endl<< endl;
+    }
 
+    if (mwon < 30)
+    {
+        ai1Card = *min_element(ai1.begin(), ai1.end());
+        ai1.erase(find(ai1.begin(), ai1.end(), ai1Card));
+        cout << "\nMax placed: " << ai1Card << endl<< endl;
+    }
+
+    if (nwon < 30)
+    {
+        ai2Card = *min_element(ai2.begin(), ai2.end());
+        ai2.erase(find(ai2.begin(), ai2.end(), ai2Card));
+        cout << "\nNugget placed: " << ai2Card << endl<< endl;
+    }
+    if (uwon > 29)
+    {
+        userCard = 100;
+    }
+    if (mwon > 29)
+    {
+        ai1Card = 100;
+    }
+    if (nwon > 29)
+    {
+        ai2Card = 100;
+    }
     int lowCard = userCard;
     string winner = "User";
     won = 1;
@@ -914,7 +964,6 @@ void playRoundP3(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& w
 void playRoundM2(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon)
 {
 
-    displayCards(player, ai1, ai2);
     cout<<endl<<endl;
     int ai2Card, userCard;
     int ai1Card = *max_element(ai1.begin(), ai1.end());
@@ -1053,7 +1102,6 @@ void playRoundN2(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& w
 void playRoundN3(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon)
 {
 
-    displayCards(player, ai1, ai2);
     cout<<endl<<endl;
     int ai2Card = *max_element(ai2.begin(), ai2.end());
     ai2.erase(find(ai2.begin(), ai2.end(), ai2Card));
@@ -1081,7 +1129,6 @@ void playRoundN3(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& w
         }
     }
 
-    cout << "\nUser placed: " << userCard << endl<< endl;
     cout << "\nMax placed: " << ai1Card << endl<< endl;
 
     if (ai1Card >= maxCard)
