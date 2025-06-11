@@ -289,7 +289,7 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
     system("cls");
     cout<<"Loading..."<<endl;
     srand(time(0));
-    delay(rand() % 6);
+    delay(rand() % 3);
     system("cls");
 
     cout<<"Done Loading, Enjoy!"<<endl;
@@ -927,6 +927,7 @@ void playRoundP3(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& w
 
     while (true)
     {
+
         if (*max_element(ai1.begin(), ai1.end()) >= maxCard)
         {
             ai1Card = *max_element(ai1.begin(), ai1.end());
