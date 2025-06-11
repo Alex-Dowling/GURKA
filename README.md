@@ -7,6 +7,6 @@ also make sure that you have winmm enabled in your complier
 
 code is code that is fully functional but less up to date
 
-expercode is code that might not properly but more up to date
+expercode is code that might not work properly but more up to date
 
 made by Alex, Dylan, Tyler
