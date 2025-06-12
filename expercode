@@ -35,7 +35,7 @@ int main ()
     double helpnugget;
     int won, playerCard, gamewon;
     vector<int> player, ai1, ai2, deck;
-    int mwon = 30, uwon = 29, nwon = 0, seven = 7;
+    int mwon = 0, uwon = 0, nwon = 0, seven = 7;
 
     // Starting the code
     Startscreen (play);
