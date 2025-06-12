@@ -11,4 +11,6 @@ code is code that is fully functional but less up to date
 
 expercode is code that might not work properly but more up to date
 
+https://sites.google.com/burlcoschools.org/gurka-card-game/home : link to website made for game 
+
 made by Alex, Dylan, Tyler
