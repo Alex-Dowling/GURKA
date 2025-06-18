@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <vector>
 #include <cstdlib>
@@ -24,7 +25,7 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
 void playRoundM(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon);
 void playRoundN(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int& playerCard, int& uwon, int& mwon, int& nwon);
 void playRoundL(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& playerCard, int& won, vector<int>& deck, int& uwon, int& mwon, int& nwon, int& seven, int& gamewon);
-void endscreen(int& gamewon, double& helpnugget, int& playagain, vector<int>& player, vector<int>& ai1, vector<int>& ai2);
+void endscreen(int& gamewon, double& helpnugget, int& playagain, vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& uwon, int& mwon, int& nwon);
 
 
 int main ()
@@ -343,17 +344,17 @@ void game(vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& won, int
 
     if (gamewon == 1)
     {
-        endscreen(gamewon, helpnugget, playagain, player, ai1, ai2);
+        endscreen(gamewon, helpnugget, playagain, player, ai1, ai2, uwon, mwon, nwon);
     }
 
     if (gamewon == 2)
     {
-        endscreen(gamewon, helpnugget, playagain, player, ai1, ai2);
+        endscreen(gamewon, helpnugget, playagain, player, ai1, ai2, uwon, mwon, nwon);
     }
 
     if (gamewon == 3)
     {
-        endscreen(gamewon, helpnugget, playagain, player, ai1, ai2);
+        endscreen(gamewon, helpnugget, playagain, player, ai1, ai2, uwon, mwon, nwon);
     }
 
 
@@ -750,7 +751,7 @@ void delay(int seconds)
     }
 }
 
-void endscreen(int& gamewon, double& helpnugget, int& playagain, vector<int>& player, vector<int>& ai1, vector<int>& ai2)
+void endscreen(int& gamewon, double& helpnugget, int& playagain, vector<int>& player, vector<int>& ai1, vector<int>& ai2, int& uwon, int& mwon, int& nwon)
 {
     system("cls");
 
@@ -776,6 +777,9 @@ void endscreen(int& gamewon, double& helpnugget, int& playagain, vector<int>& pl
             ai1.erase(ai1.begin(), ai1.end());
             ai2.erase(ai2.begin(), ai2.end());
             player.erase(player.begin(), player.end());
+            uwon = 0;
+            mwon = 0;
+            nwon = 0;
             break;
         }
         if (playagain == 2)
